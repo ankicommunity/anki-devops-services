@@ -29,7 +29,7 @@ Also, **be warned** that if you don't use any additional proxies, your connectio
 
 See below how you can point your desktop application to the server you've just created.
 
-### Deploying on a server [TEST IT!]
+### Deploying on a server 
 
 Docker will take care of starting the service on boot so you don't have to worry about that. You can setup the server with these commands:
 
