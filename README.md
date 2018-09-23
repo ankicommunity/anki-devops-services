@@ -21,7 +21,7 @@ If you've managed put your Anki devices on the same (typically LAN) network, you
        --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
        -p 27701:27701 \
        --rm \
-       anki-sync-server:tsudoku-2.1.4
+       kuklinistvan/anki-sync-server:tsudoku-2.1.4
        
 You can interrupt this instance anytime by hitting Ctrl+C. You can restart the server with the same command. Its data will be preserved in `$ANKI_SYNC_DATA_DIR`.
 
@@ -34,30 +34,30 @@ See below how you can point your desktop application to the server you've just c
 Docker will take care of starting the service on boot so you don't have to worry about that. You can setup the server with these commands:
 
     export DOCKER_USER=root
-    export ANKI_SYNC_DATA_DIR=/etc/anki
+    export ANKI_SYNC_DATA_DIR=/etc/anki-sync-server
     export HOST_PORT=27701
 
     mkdir -p "$ANKI_SYNC_DATA_DIR"
-    chown "$DOCKER_USER" /etc/anki
-    chmod 700 /etc/anki
+    chown "$DOCKER_USER" "$ANKI_SYNC_DATA_DIR"
+    chmod 700 "$ANKI_SYNC_DATA_DIR"
     
-    docker run -it \
+    docker run -itd \
        --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
        -p "$HOST_PORT":27701 \
        --name anki-container \
        --restart always \
-       anki-sync-server:tsudoku-2.1.4
+       kuklinistvan/anki-sync-server:tsudoku-2.1.4
     
 #### HTTPS Encryption with Apache Proxy
 
 Here is an example:
 
     <VirtualHost *:443>
-        ServerName my.fancy.server.net
+        ServerName anki.my.fancy.server.net
         
-        <Location /sync>
-            ProxyPass http://127.0.0.1:27701/sync
-            ProxyPassReverse http://127.0.0.1:27701/sync
+        <Location />
+            ProxyPass http://127.0.0.1:27701/sync/
+            ProxyPassReverse http://127.0.0.1:27701/sync/
         </Location>
         <Location /msync>
             ProxyPass http://127.0.0.1:27701/msync
@@ -76,6 +76,21 @@ Here is an example:
 Of course, nginx can work out too, but I didn't try it yet.
 
 **Attention**: of course, you should change the port if you've put anki-sync-server to a non-standard one.
+
+##### Proxy URL Confusion!
+
+Apparently the server does serve the urls `/sync/` and `/msync/` as it is expected from its configuration. The client, however, expects `http(s)://anki.my.fancy.server.net/` as sync url and `http(s)://anki.my.fancy.server.net/msync/` as media url. 
+
+What happens is that the client treats the media url you've is specified it **and appends `/sync/` to the base synchronisation url**.
+
+It is even enough therefore (yes, I've tested it) to proxy the `/sync/` and `/msync/` urls in case of serving other urls for other purposes on that particular virtualhost.
+
+In summary, you're specifying the urls on your devices this way:
+
+| URL Type | Server              | Client                  |
+| -------- | ------------------- | ------------------------|
+| Base     | `/sync/`            | `http:/..../`           |
+| Media    | `/msync/`           | `http:/..../msync`      |
   
 ## Creating users
 
@@ -112,7 +127,11 @@ Create the directory above and place an `__init__.py` file in it, which contains
 
 Substitute your IP address or hostname to `127.0.0.1` and optionally change the port too if you are hosting `anki-sync-server` on a non-standard one. With the default settings, these urls will work.
 
-#### URL Confusion!
+If you're using a proxy (for HTTPS encryption usually) you should specify these addresses accordingly.
+
+**Warning**: without the ` + '%s'` the plugin will crash. Was not easy to figure it out.
+
+#### Client URL Confusion!
 
 **Attention**: although the server configuration `ankisyncd.conf` contains by default these two lines:
 
@@ -120,6 +139,8 @@ Substitute your IP address or hostname to `127.0.0.1` and optionally change the 
     base_media_url = /msync/
     
 for some reason, **neither on the desktop nor on the mobile client should you append `/sync/` to the sync base url BUT you should append `/msync/` to the media sync url**. Finding this out took me 30-60 minutes, hope I've saved you this time.
+
+For more information on this strange phenomenon and on what url to specify when, see the proxy configuration above.
 
 ## Android Device
 
@@ -131,7 +152,7 @@ Open the app, then slide off the menu from the left side. Go Settings > Advanced
 
 I highly encourage you contacting me if you feel it is "broken again" - it frustrates me too and I'd like to take the effort to fix the bugs on my side.
 
-Even if it is not I'm happy to answer questions (if I can), so if you have one, just submit an issue.
+Even if it is not a bug but rather something to be clarified, I'm happy to answer questions (if I can), so if you have one, just submit an issue.
 
 ## Additional credits
 

@@ -1,10 +1,11 @@
+# WARNING: this configuration file assumes that the server is running inside its container!
+# You can only safely change the base_url and the base_media_url.
+# Well, you shouldn't change those two either, at least I've not tested their behaviour.
 [sync_app]
-# change to 127.0.0.1 if you don't want the server to be accessible from the internet
 host = 0.0.0.0
 port = 27701
 data_root = /app/data/collections
 base_url = /sync/
 base_media_url = /msync/
 auth_db_path = /app/data/auth.db
-# optional, for session persistence between restarts
 session_db_path = /app/data/session.db
