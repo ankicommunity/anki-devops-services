@@ -17,8 +17,7 @@ RUN mkdir /app/data && \
     mv /app/anki-sync-server/ankisyncd.conf /app/anki-sync-server/ankisyncd.conf.example && \
     ln -s /app/data/ankisyncd.conf /app/anki-sync-server/
 
-RUN ln -s /app/data/auth.db /app/anki-sync-server
-
+COPY config /app/config
 COPY scripts /app/scripts
 CMD /app/scripts/startup.sh
 

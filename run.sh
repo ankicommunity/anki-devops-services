@@ -4,4 +4,5 @@ cd "$DIR"
 
 docker run -it \
        --mount type=bind,source="$DIR/data",target=/app/data \
-       anki-sync-server:tsudoku-2.1.4
+       -p 27701:27701 \
+       anki-sync-server:tsudoku-2.1.4 \

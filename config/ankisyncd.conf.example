@@ -1,0 +1,10 @@
+[sync_app]
+# change to 127.0.0.1 if you don't want the server to be accessible from the internet
+host = 0.0.0.0
+port = 27701
+data_root = /app/data/collections
+base_url = /sync/
+base_media_url = /msync/
+auth_db_path = /app/data/auth.db
+# optional, for session persistence between restarts
+session_db_path = /app/data/session.db
