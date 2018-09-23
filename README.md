@@ -2,7 +2,7 @@
 
 Finally! A self-contained solution AND tutorial on how to survive setting up this mess.
 
-Tested and has worked on: 
+Has been tested and has worked on: 
 
 | Anki version  | AnkiDroid version |
 | :----------:  | :---------------: |
@@ -28,11 +28,73 @@ You can interrupt this instance anytime by hitting Ctrl+C. You can restart the s
 Also, **be warned** that if you don't use any additional proxies, your connection will be unencrypted! That means if you use Anki to memorize your passwords they will be leaked :)
 
 See below how you can point your desktop application to the server you've just created.
-### Deploying on a server
 
-    # TODO
+### Deploying on a server [TEST IT!]
+
+Docker will take care of starting the service on boot so you don't have to worry about that. You can setup the server with these commands:
+
+    export DOCKER_USER=root
+    export ANKI_SYNC_DATA_DIR=/etc/anki
+    export HOST_PORT=27701
+
+    mkdir -p "$ANKI_SYNC_DATA_DIR"
+    chown "$DOCKER_USER" /etc/anki
+    chmod 700 /etc/anki
+    
+    docker run -it \
+       --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
+       -p "$HOST_PORT":27701 \
+       --name anki-container \
+       --restart always \
+       anki-sync-server:tsudoku-2.1.4
     
 #### HTTPS Encryption with Apache Proxy
+
+Here is an example:
+
+    <VirtualHost *:443>
+        ServerName my.fancy.server.net
+        
+        <Location /sync>
+            ProxyPass http://127.0.0.1:27701/sync
+            ProxyPassReverse http://127.0.0.1:27701/sync
+        </Location>
+        <Location /msync>
+            ProxyPass http://127.0.0.1:27701/msync
+            ProxyPassReverse http://127.0.0.1:27701/msync
+        </Location>
+    
+        UseCanonicalName off
+        SSLEngine on
+        SSLProtocol +TLSv1.2
+        SSLCertificateFile /path/to/the/cert/fullchain.pem
+        SSLCertificateKeyFile /path/to/the/key/privkey.pem
+        ProxyRequests off
+        ProxyPreserveHost on
+    </VirtualHost>
+    
+Of course, nginx can work out too, but I didn't try it yet.
+
+**Attention**: of course, you should change the port if you've put anki-sync-server to a non-standard one.
+  
+## Creating users
+
+For this you need to access your container instance in order to use the server's ctl:
+
+    # docker exec -it anki-container /bin/sh
+    /app/anki-sync-server # ./ankisyncctl.py --help
+    usage: ./ankisyncctl.py <command> [<args>]
+    
+    Commands:
+      adduser <username> - add a new user
+      deluser <username> - delete a user
+      lsuser             - list users
+      passwd <username>  - change password of a user
+    /app/anki-sync-server # ./ankisyncctl.py adduser kuklinistvan
+    Enter password for kuklinistvan:
+    /app/anki-sync-server #
+    
+Done!
 
 ## Setting up your Anki client devices
 
@@ -48,7 +110,7 @@ Create the directory above and place an `__init__.py` file in it, which contains
     anki.sync.SYNC_BASE = 'http://127.0.0.1:27701/' + '%s'
     anki.sync.SYNC_MEDIA_BASE = 'http://127.0.0.1:27701/msync/' + '%s'
 
-Substitute your IP address or hostname to `127.0.0.1`. With the default settings, these urls will work.
+Substitute your IP address or hostname to `127.0.0.1` and optionally change the port too if you are hosting `anki-sync-server` on a non-standard one. With the default settings, these urls will work.
 
 #### URL Confusion!
 
@@ -69,15 +131,17 @@ Open the app, then slide off the menu from the left side. Go Settings > Advanced
 
 I highly encourage you contacting me if you feel it is "broken again" - it frustrates me too and I'd like to take the effort to fix the bugs on my side.
 
+Even if it is not I'm happy to answer questions (if I can), so if you have one, just submit an issue.
+
 ## Additional credits
 
 * https://github.com/tsudoko/anki-sync-server
 
-## Final words - Motivation
+## Final words and motivation
 
-Whenever I had to take off Anki Sync Server from the shelf, it was always broken for some reason, and it was also hard to reinstall from a clean state. These maintenances usually took from 1-2 to 5-6 hours, including finding the fork on GitHub which worked.
+Whenever I had to take off Anki Sync Server from the shelf, it was always broken for some reason, and it was also hard to reinstall from a clean state. These maintenances usually took from one to five or six hours, including finding the fork on GitHub which worked.
 
 According to the stars and the number of forks of the anki-sync-server or ankisyncd project, I'm sure I'm not the only one fighting this problem.
 
-I've decided to maintain a Docker image and a tutorial that is easy enough to follow for installation - even for a one time use on a laptop.
+I've decided to maintain a Docker image and a tutorial that is easy enough to follow for installation - for private servers or even for a one time use on a laptop.
 
