@@ -20,6 +20,7 @@ If you've managed put your Anki devices on the same (typically LAN) network, you
     docker run -it \
        --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
        -p 27701:27701 \
+       --name anki-container \
        --rm \
        kuklinistvan/anki-sync-server:tsudoku-2.1.4
        
