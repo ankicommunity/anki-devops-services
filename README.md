@@ -55,7 +55,7 @@ Here is an example:
     <VirtualHost *:443>
         ServerName anki.my.fancy.server.net
         
-        <Location />
+        <Location /sync>
             ProxyPass http://127.0.0.1:27701/sync/
             ProxyPassReverse http://127.0.0.1:27701/sync/
         </Location>
