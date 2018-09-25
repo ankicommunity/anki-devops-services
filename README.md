@@ -57,8 +57,8 @@ Here is an example:
         ServerName anki.my.fancy.server.net
         
         <Location /sync>
-            ProxyPass http://127.0.0.1:27701/sync/
-            ProxyPassReverse http://127.0.0.1:27701/sync/
+            ProxyPass http://127.0.0.1:27701/sync
+            ProxyPassReverse http://127.0.0.1:27701/sync
         </Location>
         <Location /msync>
             ProxyPass http://127.0.0.1:27701/msync
