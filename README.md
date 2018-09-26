@@ -1,6 +1,6 @@
 # Anki Sync Server with Docker - and it works!
 
-Finally! A self-contained solution AND tutorial on how to survive setting up this mess.
+A quick way to setup an up-to-date instance of Anki Sync Server, without the hassle. 
 
 Has been tested and has worked on: 
 
