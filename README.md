@@ -74,7 +74,7 @@ Here is an example:
         ProxyPreserveHost on
     </VirtualHost>
     
-Of course, nginx can work out too, but I didn't try it yet.
+Of course, nginx can work out too, but I haven't tried it yet.
 
 **Attention**: of course, you should change the port if you've put anki-sync-server to a non-standard one.
 
@@ -139,7 +139,7 @@ If you're using a proxy (for HTTPS encryption usually) you should specify these 
     base_url = /sync/
     base_media_url = /msync/
     
-for some reason, **neither on the desktop nor on the mobile client should you append `/sync/` to the sync base url BUT you should append `/msync/` to the media sync url**. Finding this out took me 30-60 minutes, hope I've saved you this time.
+for some reason, **neither on the desktop nor on the mobile client should you append `/sync/` to the sync base url BUT you should append `/msync/` to the media sync url**.
 
 For more information on this strange phenomenon and on what url to specify when, see the proxy configuration above.
 
@@ -158,12 +158,4 @@ Even if it is not a bug but rather something to be clarified, I'm happy to answe
 ## Additional credits
 
 * https://github.com/tsudoko/anki-sync-server
-
-## Final words and motivation
-
-Whenever I had to take off Anki Sync Server from the shelf, it was always broken for some reason, and it was also hard to reinstall from a clean state. These maintenances usually took from one to five or six hours, including finding the fork on GitHub which worked.
-
-According to the stars and the number of forks of the anki-sync-server or ankisyncd project, I'm sure I'm not the only one fighting this problem.
-
-I've decided to maintain a Docker image and a tutorial that is easy enough to follow for installation - for private servers or even for a one time use on a laptop.
 
