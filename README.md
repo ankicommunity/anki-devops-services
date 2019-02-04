@@ -8,6 +8,10 @@ Has been tested and has worked on:
 | :----------:  | :---------------: |
 | 2.1.4         | 2.8.3             |
 
+### Based on the work of tsudoko
+
+* https://github.com/tsudoko/anki-sync-server
+
 ## Usage
 
 ### One-time setup
@@ -155,7 +159,5 @@ I highly encourage you contacting me if you feel it is "broken again" - it frust
 
 Even if it is not a bug but rather something to be clarified, I'm happy to answer questions (if I can), so if you have one, just submit an issue.
 
-## Additional credits
 
-* https://github.com/tsudoko/anki-sync-server
 
