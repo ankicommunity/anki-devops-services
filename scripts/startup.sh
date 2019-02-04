@@ -21,5 +21,5 @@ else
     mkdir "/app/data/collections"
 fi
 
-echo Startings tsudoko\'s anki-sync-server
+echo Starting tsudoko\'s anki-sync-server
 python -m ankisyncd
