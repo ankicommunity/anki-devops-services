@@ -6,7 +6,11 @@ config = mw.addonManager.getConfig(__name__)
 
 def main():
     sync_redirector = SyncRedirector(config["syncUrl"], config["msyncUrl"])
-    sync_redirector.print_config_motd()
+
+    SyncRedirector.print_introduction()
+    sync_redirector.print_config()
+    SyncRedirector.print_restart_warning()
+
     sync_redirector.reconfigure_anki_syncing()
 
 
@@ -18,10 +22,17 @@ class SyncRedirector:
         self.configured_sync_url = configured_sync_url
         self.configured_msync_url = configured_msync_url
 
-    def print_config_motd(self):
-        print("Custom Sync Server Configuration")
+    def print_introduction():
+        print("== SyncRedirector Addon ==")
+
+    def print_config(self):
         print("/sync URL: " + self.configured_sync_url)
         print("/msync URL: " + self.configured_msync_url)
+
+    def print_restart_warning():
+        print(
+            "WARNING: please restart Anki after configuring this addon in order to the changes take effect!"
+        )
 
     def reconfigure_anki_syncing(self):
         """
