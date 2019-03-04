@@ -1,0 +1,4 @@
+{
+    "syncUrl": "http://127.0.0.1:27701/sync/",
+    "msyncUrl": "http://127.0.0.1:27701/msync/"
+}
