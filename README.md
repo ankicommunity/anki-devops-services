@@ -1,12 +1,12 @@
 # Anki Sync Server with Docker - and it works!
 
-A quick way to setup an up-to-date instance of Anki Sync Server, without the hassle. 
+A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle. 
 
 Has been tested and has worked on: 
 
-| Anki version  | AnkiDroid version |
-| :----------:  | :---------------: |
-| 2.1.4         | 2.8.3             |
+|    Date    |                     AnkiDesktop version                      | AnkiDroid version |
+| :--------: | :----------------------------------------------------------: | :---------------: |
+| 2019-03-04 | 2.1.9 [from the official website](https://apps.ankiweb.net/) |       2.8.4       |
 
 ### Based on the work of tsudoko
 
@@ -16,19 +16,19 @@ Has been tested and has worked on:
 
 ### One-time setup
 
-If you've managed put your Anki devices on the same (typically LAN) network, you may use one of your computers to host the synchronisation server with this command:
+If you've managed put your Anki devices on the same (typically LAN) network, you may use one of your computers to host the synchronization server with this command:
 
     export ANKI_SYNC_DATA_DIR=~/anki-sync-server-docker-data
-
+    
     mkdir -p "$ANKI_SYNC_DATA_DIR"
     docker run -it \
        --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
        -p 27701:27701 \
        --name anki-container \
        --rm \
-       kuklinistvan/anki-sync-server:tsudoku-2.1.4
-       
-You can interrupt this instance anytime by hitting Ctrl+C. You can restart the server with the same command. Its data will be preserved in `$ANKI_SYNC_DATA_DIR`.
+       kuklinistvan/anki-sync-server:latest
+
+You can interrupt this instance anytime by hitting Ctrl+C. You can restart the server with the same command. Its data is going to be preserved in `$ANKI_SYNC_DATA_DIR`.
 
 Also, **be warned** that if you don't use any additional proxies, your connection will be unencrypted! That means if you use Anki to memorize your passwords they will be leaked :)
 
@@ -41,7 +41,7 @@ Docker will take care of starting the service on boot so you don't have to worry
     export DOCKER_USER=root
     export ANKI_SYNC_DATA_DIR=/etc/anki-sync-server
     export HOST_PORT=27701
-
+    
     mkdir -p "$ANKI_SYNC_DATA_DIR"
     chown "$DOCKER_USER" "$ANKI_SYNC_DATA_DIR"
     chmod 700 "$ANKI_SYNC_DATA_DIR"
@@ -51,8 +51,8 @@ Docker will take care of starting the service on boot so you don't have to worry
        -p "$HOST_PORT":27701 \
        --name anki-container \
        --restart always \
-       kuklinistvan/anki-sync-server:tsudoku-2.1.4
-    
+       kuklinistvan/anki-sync-server:latest
+
 #### HTTPS Encryption with Apache Proxy
 
 Here is an example:
@@ -77,26 +77,11 @@ Here is an example:
         ProxyRequests off
         ProxyPreserveHost on
     </VirtualHost>
-    
+
 Of course, nginx can work out too, but I haven't tried it yet.
 
 **Attention**: of course, you should change the port if you've put anki-sync-server to a non-standard one.
 
-##### Proxy URL Confusion!
-
-Apparently the server does serve the urls `/sync/` and `/msync/` as it is expected from its configuration. The client, however, expects `http(s)://anki.my.fancy.server.net/` as sync url and `http(s)://anki.my.fancy.server.net/msync/` as media url. 
-
-What happens is that the client treats the media url you've is specified it **and appends `/sync/` to the base synchronisation url**.
-
-It is even enough therefore (yes, I've tested it) to proxy the `/sync/` and `/msync/` urls in case of serving other urls for other purposes on that particular virtualhost.
-
-In summary, you're specifying the urls on your devices this way:
-
-| URL Type | Server              | Client                  |
-| -------- | ------------------- | ------------------------|
-| Base     | `/sync/`            | `http:/..../`           |
-| Media    | `/msync/`           | `http:/..../msync`      |
-  
 ## Creating users
 
 For this you need to access your container instance in order to use the server's ctl:
@@ -113,45 +98,29 @@ For this you need to access your container instance in order to use the server's
     /app/anki-sync-server # ./ankisyncctl.py adduser kuklinistvan
     Enter password for kuklinistvan:
     /app/anki-sync-server #
-    
+
 Done!
 
 ## Setting up your Anki client devices
 
-### Desktop computer
+### Desktop computer (new, easier!)
 
-Find Anki's folder in your home directory and create a new addon in it. On my computer the final destination of this addon is:
+1. Launch Anki
+2. Go to Tools > Add-ons
+3. Click Get Add-ons...
+4. Reference the SyncRedirector plugin with the code **2124817646**
+5. If you use docker-anki-sync-server on an external server or custom port:
+   1. Select SyncRedirector and click Config
+   2. Configure your sync urls
+6. Restart Anki - optionally check your console output.
 
-    ~/.local/share/Anki2/addons21/MySyncServer
-    
-Create the directory above and place an `__init__.py` file in it, which contains this:
+> For those who have been using this solution and had to deal with "proxy url confusion", note that this plugin hides the strange behaviour of `/msync` and `/sync` urls, thus you can specify the same two urls on the desktop client and on your Android device.
 
-    import anki.sync
-    anki.sync.SYNC_BASE = 'http://127.0.0.1:27701/' + '%s'
-    anki.sync.SYNC_MEDIA_BASE = 'http://127.0.0.1:27701/msync/' + '%s'
+Plugin site: https://ankiweb.net/shared/info/2124817646
 
-Substitute your IP address or hostname to `127.0.0.1` and optionally change the port too if you are hosting `anki-sync-server` on a non-standard one. With the default settings, these urls will work.
-
-If you're using a proxy (for HTTPS encryption usually) you should specify these addresses accordingly.
-
-**Warning**: without the ` + '%s'` the plugin will crash. Was not easy to figure it out.
-
-#### Client URL Confusion!
-
-**Attention**: although the server configuration `ankisyncd.conf` contains by default these two lines:
-
-    base_url = /sync/
-    base_media_url = /msync/
-    
-for some reason, **neither on the desktop nor on the mobile client should you append `/sync/` to the sync base url BUT you should append `/msync/` to the media sync url**.
-
-For more information on this strange phenomenon and on what url to specify when, see the proxy configuration above.
-
-## Android Device
+### Android Device
 
 Open the app, then slide off the menu from the left side. Go Settings > Advanced > Custom sync server and specify the same two urls you've specified on the desktop client.
-
-**Attention**: please see the **URL Confusion** part.
 
 ## Does not work? Submit an issue!
 
