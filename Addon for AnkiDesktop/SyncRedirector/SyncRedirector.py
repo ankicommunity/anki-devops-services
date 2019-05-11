@@ -1,5 +1,10 @@
+# Based on the work of tsudoko and their contributors
+# https://github.com/tsudoko/anki-sync-server
+
 from .Utils import url_ending_with_slash
 import anki.sync
+import anki.hooks
+import aqt
 
 
 class SyncRedirector:
@@ -28,6 +33,7 @@ class SyncRedirector:
         """
         print("Configuring Anki to sync against custom servers...")
 
+        anki.hooks.addHook("profileLoaded", resetHostNum)
         anki.sync.SYNC_BASE = self._parse_sync_url_for_anki_desktop()
         anki.sync.SYNC_MEDIA_BASE = self._parse_msync_url_for_anki_desktop()
 
@@ -42,3 +48,7 @@ class SyncRedirector:
         Expects url ending with /msync or /msync/
         """
         return url_ending_with_slash(self.configured_msync_url) + "%s"
+
+
+def resetHostNum():
+    aqt.mw.pm.profile["hostNum"] = None
