@@ -6,20 +6,21 @@
 2. Set up an up-to-date Anki and AnkiDroid instance
 3. Create two deck of cards in Anki desktop
    * 5-5 cards each
-   * The first deck has no pictured cards, the second one does
+   * The first deck has cards with pictures, the second one does
 4. Synchronize
 
 
 
 Then I test whether any of these steps done on any (droid or desktop) instance breaks the synchronization:
 
-1. Revisit some cards
+1. Review some cards
 2. Add new cards
-3. Remove one card
-4. Remove a deck
-5. Create a practice deck
+3. Edit one card
+4. Remove one card
+5. Create a filtered deck
 6. Checking media
 7. Checking database
+8. Remove a deck
 
 
 
