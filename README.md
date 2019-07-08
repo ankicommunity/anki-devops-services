@@ -4,9 +4,11 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 
 Has been tested and has worked on: 
 
-|    Date    |                     AnkiDesktop version                      | AnkiDroid version |
-| :--------: | :----------------------------------------------------------: | :---------------: |
-| 2019-03-04 | 2.1.9 [from the official website](https://apps.ankiweb.net/) |       2.8.4       |
+|    Date    |                     AnkiDesktop version                      | AnkiDroid version | Tester       |
+| :--------: | :----------------------------------------------------------: | :---------------: | ------------ |
+| 2019-03-04 | 2.1.9 [from the official website](https://apps.ankiweb.net/) |       2.8.4       | kuklinistvan |
+
+[Learn more about what "tested" means here.](Testing.md)
 
 ### Based on the work of tsudoko
 
