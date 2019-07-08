@@ -5,4 +5,4 @@ git clone https://github.com/tsudoko/anki-sync-server
 cd anki-sync-server
 git submodule update --init
 cd ..
-docker build -t anki-sync-server:tsudoku-2.1.4 .
+docker build -t anki-sync-server:tsudoku-2.1.14 .
