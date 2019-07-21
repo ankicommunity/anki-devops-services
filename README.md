@@ -2,15 +2,26 @@
 
 A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle. 
 
+
+### Based on the work of tsudoko
+
+* https://github.com/tsudoko/anki-sync-server
+
+## Status
+
 Has been tested and has worked on: 
 
 |    Date    |                     AnkiDesktop version                      | AnkiDroid version |
 | :--------: | :----------------------------------------------------------: | :---------------: |
 | 2019-03-04 | 2.1.9 [from the official website](https://apps.ankiweb.net/) |       2.8.4       |
 
-### Based on the work of tsudoko
+### News
 
-* https://github.com/tsudoko/anki-sync-server
+#### Upgrading to Anki 2.1.14
+
+I have encountered a synchronization problem while testing the image for Anki 2.1.14. As I do not maintain the source code `ankisyncd` but the Docker image only, right now I am waiting for feedback and keep the last working version here. See the issue below to learn about the error.
+
+https://github.com/tsudoko/anki-sync-server/issues/41
 
 ## Usage
 
