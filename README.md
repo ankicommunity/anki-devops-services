@@ -64,6 +64,19 @@ Docker will take care of starting the service on boot so you don't have to worry
        --restart always \
        kuklinistvan/anki-sync-server:latest
 
+or using `docker-compose`:
+    
+    version: "3"
+    
+    services:
+        anki-sync-server:
+            image: kuklinistvan/anki-sync-server:latest
+            restart: always
+            ports:
+            - "27701:27701"
+            volumes:
+            - ./data:/app/data
+
 #### HTTPS Encryption with Apache Proxy
 
 Here is an example:
