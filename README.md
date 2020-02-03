@@ -2,11 +2,12 @@
 
 A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle. 
 
-Has been tested and has worked on: 
+`ankisyncd` has been tested in this Docker image and has worked on: 
 
-|    Date    |                     AnkiDesktop version                      | AnkiDroid version | Tester       |
-| :--------: | :----------------------------------------------------------: | :---------------: | ------------ |
-| 2019-03-04 | 2.1.9 [from the official website](https://apps.ankiweb.net/) |       2.8.4       | kuklinistvan |
+|    Date    | AnkiDesktop version | AnkiDroid version | ankisyncd version | Tester       |
+| :--------: | :-----------------: | :---------------: | :---------------: | ------------ |
+| 2019-03-04 |        2.1.9        |       2.8.4       |         ?         | kuklinistvan |
+| 2020-02-03 |       2.1.19        |       2.9.1       |       2.1.0       | kuklinistvan |
 
 [Learn more about what "tested" means here.](Testing.md)
 

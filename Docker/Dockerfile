@@ -19,6 +19,7 @@ RUN mkdir /app/data && \
 
 COPY config /app/config
 COPY scripts /app/scripts
+
 CMD /app/scripts/startup.sh
 
 EXPOSE 27701

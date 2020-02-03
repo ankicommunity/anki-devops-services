@@ -21,5 +21,9 @@ else
     mkdir "/app/data/collections"
 fi
 
+echo Updating database schema
+
+/app/anki-sync-server/utils/migrate_user_tables.py
+
 echo Starting tsudoko\'s anki-sync-server
 python -m ankisyncd
