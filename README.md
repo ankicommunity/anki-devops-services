@@ -1,19 +1,22 @@
 # Anki Sync Server with Docker - and it works!
 
-A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle. 
-
-`ankisyncd` has been tested in this Docker image and has worked on: 
+A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle.
 
 |    Date    | AnkiDesktop version | AnkiDroid version | ankisyncd version | Tester       |
 | :--------: | :-----------------: | :---------------: | :---------------: | ------------ |
-| 2019-03-04 |        2.1.9        |       2.8.4       |         ?         | kuklinistvan |
 | 2020-02-03 |       2.1.19        |       2.9.1       |       2.1.0       | kuklinistvan |
 
 [Learn more about what "tested" means here.](Testing.md)
 
-### Based on the work of tsudoko
+### News
 
-* https://github.com/tsudoko/anki-sync-server
+* 2020-02-03:
+
+  AnkiDesktop 2.1.19, AnkiDroid 2.9.1 is tested and works with `ankisyncd` 2.1.0.
+
+* 2019-07-08:
+
+  https://github.com/tsudoko/anki-sync-server/issues/41
 
 ## Usage
 
@@ -37,7 +40,7 @@ Also, **be warned** that if you don't use any additional proxies, your connectio
 
 See below how you can point your desktop application to the server you've just created.
 
-### Deploying on a server 
+### Deploying on a server
 
 Docker will take care of starting the service on boot so you don't have to worry about that. You can setup the server with these commands:
 
@@ -56,13 +59,26 @@ Docker will take care of starting the service on boot so you don't have to worry
        --restart always \
        kuklinistvan/anki-sync-server:latest
 
+or using `docker-compose`:
+
+    version: "3"
+    
+    services:
+        anki-sync-server:
+            image: kuklinistvan/anki-sync-server:latest
+            restart: always
+            ports:
+            - "27701:27701"
+            volumes:
+            - ./data:/app/data
+
 #### HTTPS Encryption with Apache Proxy
 
 Here is an example:
 
     <VirtualHost *:443>
         ServerName anki.my.fancy.server.net
-        
+    
         <Location /sync>
             ProxyPass http://127.0.0.1:27701/sync
             ProxyPassReverse http://127.0.0.1:27701/sync
@@ -130,6 +146,3 @@ Open the app, then slide off the menu from the left side. Go Settings > Advanced
 I highly encourage you contacting me if you feel it is "broken again" - it frustrates me too and I'd like to take the effort to fix the bugs on my side.
 
 Even if it is not a bug but rather something to be clarified, I'm happy to answer questions (if I can), so if you have one, just submit an issue.
-
-
-
