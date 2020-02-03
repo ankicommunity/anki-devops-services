@@ -2,6 +2,8 @@
 
 A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle.
 
+## Tested and works on:
+
 |    Date    | AnkiDesktop version | AnkiDroid version | ankisyncd version | Tester       |
 | :--------: | :-----------------: | :---------------: | :---------------: | ------------ |
 | 2020-02-03 |       2.1.19        |       2.9.1       |       2.1.0       | kuklinistvan |
