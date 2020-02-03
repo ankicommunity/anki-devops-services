@@ -13,15 +13,19 @@ Has been tested and has worked on:
 
 |    Date    |                     AnkiDesktop version                      | AnkiDroid version |
 | :--------: | :----------------------------------------------------------: | :---------------: |
-| 2019-03-04 | 2.1.9 [from the official website](https://apps.ankiweb.net/) |       2.8.4       |
+| 2019-03-04 | [2.1.9 from the official website](https://apps.ankiweb.net/downloads/archive/anki-2.1.9-linux-amd64.tar.bz2) |       [2.8.4 from F-Droid](https://f-droid.org/repo/com.ichi2.anki_20804300.apk)       |
 
 ### News
 
-#### Upgrading to Anki 2.1.14
+*  2020-02-03:
 
-I have encountered a synchronization problem while testing the image for Anki 2.1.14. As I do not maintain the source code `ankisyncd` but the Docker image only, right now I am waiting for feedback and keep the last working version here. See the issue below to learn about the error.
+   Tsudoko's server project `ankisyncd` supports Anki [up to to version 2.1.11](https://github.com/tsudoko/anki-sync-server#installing). Unfortunately I only have time for packaging the existing solution as a Docker image, but I'm keeping an eye on the server. If a new update gets released, I'm ready to test it and adopt it. In the meantime I encourage you to use the older version if you can because it already does a fine job helping your studying.
+   
+   You may get [Anki 2.1.9 from the official website](https://apps.ankiweb.net/downloads/archive/anki-2.1.9-linux-amd64.tar.bz2) and [AnkiDroid 2.8.4 from F-Droid](https://f-droid.org/repo/com.ichi2.anki_20804300.apk).
 
-https://github.com/tsudoko/anki-sync-server/issues/41
+* 2019-07-08:
+
+  https://github.com/tsudoko/anki-sync-server/issues/41
 
 ## Usage
 
