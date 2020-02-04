@@ -4,7 +4,7 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 
 |    Date    | AnkiDesktop version | AnkiDroid version | ankisyncd version | Tester       |
 | :--------: | :-----------------: | :---------------: | :---------------: | ------------ |
-| 2020-02-03 |       2.1.19        |       2.9.1       |       2.1.0       | kuklinistvan |
+| 2020-02-04 |       2.1.19        |       2.9.1       |       2.1.0       | kuklinistvan |
 
 [Learn more about what "tested" means here.](Testing.md)
 
@@ -25,7 +25,7 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 If you've managed put your Anki devices on the same (typically LAN) network, you may use one of your computers to host the synchronization server with this command:
 
     export ANKI_SYNC_DATA_DIR=~/anki-sync-server-docker-data
-    
+
     mkdir -p "$ANKI_SYNC_DATA_DIR"
     docker run -it \
        --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
@@ -47,11 +47,11 @@ Docker will take care of starting the service on boot so you don't have to worry
     export DOCKER_USER=root
     export ANKI_SYNC_DATA_DIR=/etc/anki-sync-server
     export HOST_PORT=27701
-    
+
     mkdir -p "$ANKI_SYNC_DATA_DIR"
     chown "$DOCKER_USER" "$ANKI_SYNC_DATA_DIR"
     chmod 700 "$ANKI_SYNC_DATA_DIR"
-    
+
     docker run -itd \
        --mount type=bind,source="$ANKI_SYNC_DATA_DIR",target=/app/data \
        -p "$HOST_PORT":27701 \
@@ -62,7 +62,7 @@ Docker will take care of starting the service on boot so you don't have to worry
 or using `docker-compose`:
 
     version: "3"
-    
+
     services:
         anki-sync-server:
             image: kuklinistvan/anki-sync-server:latest
@@ -78,7 +78,7 @@ Here is an example:
 
     <VirtualHost *:443>
         ServerName anki.my.fancy.server.net
-    
+
         <Location /sync>
             ProxyPass http://127.0.0.1:27701/sync
             ProxyPassReverse http://127.0.0.1:27701/sync
@@ -87,7 +87,7 @@ Here is an example:
             ProxyPass http://127.0.0.1:27701/msync
             ProxyPassReverse http://127.0.0.1:27701/msync
         </Location>
-    
+
         UseCanonicalName off
         SSLEngine on
         SSLProtocol +TLSv1.2
@@ -108,7 +108,7 @@ For this you need to access your container instance in order to use the server's
     # docker exec -it anki-container /bin/sh
     /app/anki-sync-server # ./ankisyncctl.py --help
     usage: ./ankisyncctl.py <command> [<args>]
-    
+
     Commands:
       adduser <username> - add a new user
       deluser <username> - delete a user
