@@ -2,6 +2,8 @@
 
 A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle.
 
+> Based on tsudoko's [`ankisyncd`](https://github.com/tsudoko/anki-sync-server)
+
 ## Tested and works on:
 
 |    Date    | AnkiDesktop version | AnkiDroid version |                      ankisyncd version                       | Tester       |
