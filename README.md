@@ -8,7 +8,7 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 
 |    Date    |                     AnkiDesktop version                      |                      AnkiDroid version                       |                      ankisyncd version                       | Tester       |
 | :--------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | ------------ |
-| 2020-02-06 | 2.1.19<br /> [(get from GitHub)](https://github.com/ankitects/anki/archive/2.1.19.zip) | 2.9.1<br />[(get from F-Droid Archive)][https://fdroid.tetaneutral.net/fdroid/archive/com.ichi2.anki_20901300.apk] | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
+| 2020-02-06 | 2.1.19<br /> [(get from GitHub)](https://github.com/ankitects/anki/archive/2.1.19.zip) | 2.9.1<br />[(get from F-Droid Archive)](https://fdroid.tetaneutral.net/fdroid/archive/com.ichi2.anki_20901300.apk) | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
 
 [Learn more about what "tested" means here.](Testing.md)
 
