@@ -4,14 +4,6 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 
 > Based on tsudoko's [`ankisyncd`](https://github.com/tsudoko/anki-sync-server)
 
-## Tested and works on:
-
-|    Date    |                     AnkiDesktop version                      |                      AnkiDroid version                       |                      ankisyncd version                       | Tester       |
-| :--------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | ------------ |
-| 2020-02-06 | 2.1.19<br /> [(get from GitHub)](https://github.com/ankitects/anki/archive/2.1.19.zip) | 2.9.1<br />[(get from F-Droid Archive)](https://fdroid.tetaneutral.net/fdroid/archive/com.ichi2.anki_20901300.apk) | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
-
-[Learn more about what "tested" means here.](Testing.md)
-
 ### News
 
 * 2020-02-06:
@@ -21,6 +13,21 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 * 2019-07-08:
 
   https://github.com/tsudoko/anki-sync-server/issues/41
+
+## Tested and works on:
+
+|    Date    | AnkiDesktop version | AnkiDroid version |                      ankisyncd version                       | Tester       |
+| :--------: | :-----------------: | :---------------: | :----------------------------------------------------------: | ------------ |
+| 2020-02-06 |       2.1.19        |       2.9.1       | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
+
+[Learn more about what "tested" means here.](Testing.md)
+
+### Tested client downloads
+
+|                           | Main                                                         | Mirror                                                       | Size     | SHA256                                                       |      |
+| ------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- | ------------------------------------------------------------ | ---- |
+| AnkiDesktop               | [2.1.19](https://apps.ankiweb.net/downloads/current/anki-2.1.19-linux-amd64.tar.bz2) | [2.1.19](https://mega.nz/file/lVxRgRwI#Oqohl1M0Ju9RrYa7D6uV5SOtwgqVxkxPKqNYxcOh858) | 127.7 MB | ada59237b8b3774712d6309821db4b6cb1d2c625284302aa09bc7313ada76fc0 |      |
+| AnkiDroid APK for Android | [2.9.1](https://fdroid.tetaneutral.net/fdroid/archive/com.ichi2.anki_20901300.apk) | [2.9.1](https://mega.nz/file/YFoFER5S#BiMMDxyhdl_u9I1TC-v_bBYakM5DTTM5CybJb4pu4oY) | 10.7 MB  | 511ef65b8dcb65a7f99f9942c4fcee5134f137ce23c677cf1ea3b26c7c3f34c5 |      |
 
 ## Usage
 
