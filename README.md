@@ -4,9 +4,9 @@ A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, w
 
 ## Tested and works on:
 
-|    Date    | AnkiDesktop version | AnkiDroid version |                      ankisyncd version                       | Tester       |
-| :--------: | :-----------------: | :---------------: | :----------------------------------------------------------: | ------------ |
-| 2020-02-06 |       2.1.19        |       2.9.1       | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
+|    Date    |                     AnkiDesktop version                      |                      AnkiDroid version                       |                      ankisyncd version                       | Tester       |
+| :--------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | ------------ |
+| 2020-02-06 | 2.1.19<br /> [(get from GitHub)](https://github.com/ankitects/anki/archive/2.1.19.zip) | 2.9.1<br />[(get from F-Droid Archive)][https://fdroid.tetaneutral.net/fdroid/archive/com.ichi2.anki_20901300.apk] | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
 
 [Learn more about what "tested" means here.](Testing.md)
 
@@ -124,7 +124,14 @@ Done!
 
 ## Setting up your Anki client devices
 
-### Desktop computer (new, easier!)
+| What you need to publish     | Specify in AnkiDesktop       | Specify in AnkiDroid         |
+| ---------------------------- | ---------------------------- | ---------------------------- |
+| http://127.0.0.1:27701/sync  | http://127.0.0.1:27701/sync  | http://127.0.0.1:27701/      |
+| http://127.0.0.1:27701/msync | http://127.0.0.1:27701/msync | http://127.0.0.1:27701/msync |
+
+>  Do not put trailing slashes!
+
+### AnkiDesktop
 
 1. Launch Anki
 2. Go to Tools > Add-ons
@@ -135,11 +142,9 @@ Done!
    2. Configure your sync urls
 6. Restart Anki - optionally check your console output.
 
-> For those who have been using this solution and had to deal with "proxy url confusion", note that this plugin hides the strange behaviour of `/msync` and `/sync` urls, thus you can specify the same two urls on the desktop client and on your Android device.
-
 Plugin site: https://ankiweb.net/shared/info/2124817646
 
-### Android Device
+### AnkiDroid
 
 Open the app, then slide off the menu from the left side. Go Settings > Advanced > Custom sync server and specify the same two urls you've specified on the desktop client.
 
@@ -148,3 +153,4 @@ Open the app, then slide off the menu from the left side. Go Settings > Advanced
 I highly encourage you contacting me if you feel it is "broken again" - it frustrates me too and I'd like to take the effort to fix the bugs on my side.
 
 Even if it is not a bug but rather something to be clarified, I'm happy to answer questions (if I can), so if you have one, just submit an issue.
+
