@@ -1,6 +1,6 @@
 ---
-name: Question / suggestion / anything else :)
-about: ''
+name: Question / Suggestion
+about: Anything else :)
 title: ''
 labels: ''
 assignees: ''

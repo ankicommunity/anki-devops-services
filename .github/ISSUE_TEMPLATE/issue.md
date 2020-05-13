@@ -1,6 +1,6 @@
 ---
 name: Issue
-about: Describe this issue template's purpose here.
+about: If something did not work the way it was expected
 title: ''
 labels: ''
 assignees: ''
