@@ -1,6 +1,6 @@
 # Anki Sync Server with Docker - and it works!
 
-A quick and ergonomic way to setup an up-to-date instance of Anki Sync Server, without the hassle.
+A quick and ergonomic way to setup a (reasonably) up-to-date instance of Anki Sync Server, without the hassle.
 
 > Based on tsudoko's [`ankisyncd`](https://github.com/tsudoko/anki-sync-server)
 
