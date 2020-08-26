@@ -174,3 +174,9 @@ I highly encourage you contacting me if you feel it is "broken again" - it frust
 
 Even if it is not a bug but rather something to be clarified, I'm happy to answer questions (if I can), so if you have one, just submit an issue.
 
+### Contact us at Gitter
+
+An even quicker way to ask questions is to join the community chat at the link below:
+
+https://gitter.im/ankicommunity/community
+
