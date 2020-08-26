@@ -23,3 +23,5 @@ COPY scripts /app/scripts
 CMD /app/scripts/startup.sh
 
 EXPOSE 27701
+
+HEALTHCHECK --interval=5s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
