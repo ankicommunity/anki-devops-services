@@ -6,6 +6,21 @@ A quick and ergonomic way to setup a (reasonably) up-to-date instance of Anki Sy
 
 ### News
 
+* 2020-09-21:
+
+  Follow us on Gitter to learn the current progress of supporting newer versions of Anki!
+  
+  https://gitter.im/ankicommunity/community
+ 
+  Special thanks for the work of the server contributors, among them to [AntonOfTheWoods](https://github.com/AntonOfTheWoods) and [VikashKothary](https://github.com/VikashKothary)!
+
+  Learn more about the problem here:
+  * https://github.com/kuklinistvan/docker-anki-sync-server/issues/16#issuecomment-626304807
+  * https://github.com/ankicommunity/docker-anki-sync-server/issues/5
+  * https://github.com/kuklinistvan/docker-anki-sync-server/issues/15
+  * https://github.com/kuklinistvan/docker-anki-sync-server/issues/14
+  
+
 * 2020-02-06:
 
   AnkiDesktop 2.1.19, AnkiDroid 2.9.1 is tested and works with `ankisyncd` 2.1.0 with commit [2bfccf7f](<https://github.com/tsudoko/anki-sync-server/commit/2bfccf7fa4af87545f009729ff6e84934c6fde0b>) applied on the top of that.
