@@ -189,8 +189,20 @@ The first command give you a shell inside the docker container, once you are ins
 Done!
 
 ### HTTPS Encryption with Apache Proxy
+You are using ankidroid and you were greeted with an error or you want just want to use https because you dant want the data of your flashcard to appear in clear over the network then you should follow the followings instructions.
 
-Here is an example:
+You need an apache2 or ngninx server running somewhere.
+Here is the detailed procedure for apache2
+
+    sudo apt-get install apache2
+    sudo a2enmod proxy
+    sudo a2enmod proxy_http
+    sudo systemctl restart apache2
+
+then you can edit this file ( if you know what this is or have other site running on the same server, you can do it in another one (beware the port))
+    sudo nano /etc/apache2/sites-available/000-default.conf
+
+Here is an example what you should paste inside:
 
     <VirtualHost *:443>
         ServerName anki.my.fancy.server.net
