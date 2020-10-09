@@ -206,6 +206,7 @@ openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out c
 
 it generate two file. move them somewhere safe and add the path to thoses two file in the following config
 (DISCLAIMER, the forementionned command may not be best practice but hey, it work)
+transfer the cert.pem file to phone where you run AnkiDroid as you need to import is (save it on youre phone and go under settings and look for biometrics and security -> other securty settings -> intall from local storage
 
 then you can edit this file ( if you know what this is or have other site running on the same server, you can do it in another one (beware the port))
     sudo nano /etc/apache2/sites-available/000-default.conf
