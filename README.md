@@ -197,6 +197,7 @@ Here is the detailed procedure for apache2
     sudo apt-get install apache2
     sudo a2enmod proxy
     sudo a2enmod proxy_http
+    sudo a2enmod ssl
     sudo systemctl restart apache2
 
 then you can edit this file ( if you know what this is or have other site running on the same server, you can do it in another one (beware the port))
