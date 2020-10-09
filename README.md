@@ -200,6 +200,13 @@ Here is the detailed procedure for apache2
     sudo a2enmod ssl
     sudo systemctl restart apache2
 
+now you need to generate a self signed certificate. you can do so with the following command
+
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout key.pem -out cert.pem
+
+it generate two file. move them somewhere safe and add the path to thoses two file in the following config
+(DISCLAIMER, the forementionned command may not be best practice but hey, it work)
+
 then you can edit this file ( if you know what this is or have other site running on the same server, you can do it in another one (beware the port))
     sudo nano /etc/apache2/sites-available/000-default.conf
 
@@ -220,8 +227,8 @@ Here is an example what you should paste inside:
         UseCanonicalName off
         SSLEngine on
         SSLProtocol +TLSv1.2
-        SSLCertificateFile /path/to/the/cert/fullchain.pem
-        SSLCertificateKeyFile /path/to/the/key/privkey.pem
+        SSLCertificateFile /path/to/the/cert/cert.pem
+        SSLCertificateKeyFile /path/to/the/key/key.pem
         ProxyRequests off
         ProxyPreserveHost on
     </VirtualHost>
