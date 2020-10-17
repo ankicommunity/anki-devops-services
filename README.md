@@ -26,7 +26,7 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
   * [Will it work on newest version on of Anki desktop? (unlikely for now)](https://github.com/ankicommunity/docker-anki-sync-server/issues/5)
   * [Unable to login on Anki 2.1.23-1](https://github.com/kuklinistvan/docker-anki-sync-server/issues/15)
   * ["Your client is using unsupported sync protocol (10, supported version: 9) ](https://github.com/kuklinistvan/docker-anki-sync-server/issues/14)
-  * [Dont work on ARM CPU (Raspberry pi)](
+  * [Dont work on ARM CPU (Raspberry pi)](https://github.com/ankicommunity/docker-anki-sync-server/issues/9)
 
 
 
@@ -40,7 +40,7 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 
 [Learn more about what "tested" means here.](Testing.md)
 
-* * https://github.com/ankicommunity/docker-anki-sync-server/issues/9)
+
 
 
 ### About this Docker image
