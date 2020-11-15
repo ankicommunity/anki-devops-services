@@ -20,12 +20,12 @@ COPY ./app /app
 WORKDIR /app/anki-sync-server
 
 RUN apk add --no-cache --virtual .install-deps git \
-# Install anki-sync-server
+# Clone anki-sync-server
  && git clone -n https://github.com/kuklinistvan/anki-sync-server . \
  && git checkout ${SERVER_COMMIT} \
  && mv ankisyncd.conf ankisyncd.conf.example \
  && ln -s /app/config/ankisyncd.conf . \
-# Install anki
+# Clone anki
  && git clone -n https://github.com/dae/anki.git ./anki-bundled \
  && git --work-tree="anki-bundled" --git-dir="anki-bundled/.git" checkout ${ANKI_COMMIT} \
  && pip install --no-cache-dir -r ./anki-bundled/requirements.txt \
@@ -40,7 +40,7 @@ RUN apk add --no-cache --virtual .install-deps git \
 
 USER ankisync
 
-ENTRYPOINT ["/bin/sh","/app/scripts/startup.sh"]
+CMD ["/bin/sh","/app/scripts/startup.sh"]
 
 EXPOSE 27701
 
