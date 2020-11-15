@@ -4,7 +4,7 @@ if [ -f "/app/data/ankisyncd.conf" ]; then
     echo "ankisyncd.conf found"
 else
     echo "Creating new configuration file: ankisyncd.conf."
-    cp "/app/config/ankisyncd.conf.example" "/app/data/ankisyncd.conf"
+    cp "/app/config/ankisyncd.conf" "/app/data/ankisyncd.conf"
 fi
 
 if [ -f "/app/data/auth.db" ]; then

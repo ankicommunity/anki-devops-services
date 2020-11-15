@@ -1,26 +1,46 @@
 FROM library/python:3.7.0-alpine3.8
 
-RUN apk add build-base
-RUN apk add portaudio-dev
-RUN apk add sqlite
-RUN pip install webob
+LABEL maintainer="istvan@codekuklin.com"
 
-COPY anki-sync-server /app/anki-sync-server
+ARG SERVER_COMMIT='8551021f2b2356e3c3449c1ea6b9745f0856af66'
+ARG ANKI_COMMIT='cca3fcb2418880d0430a5c5c2e6b81ba260065b7'
+
+SHELL ["/bin/sh", "-euxo", "pipefail", "-c"]
+
+RUN  adduser ankisync -D -s /bin/false
+
+RUN apk add --no-cache \
+        build-base \
+        portaudio-dev \
+        sqlite \
+ && pip install --no-cache-dir webob
+
+COPY ./app /app
 
 WORKDIR /app/anki-sync-server
 
-RUN \
-    cd anki-bundled && \
-    pip install -r requirements.txt
+RUN apk add --no-cache --virtual .install-deps git \
+# Install anki-sync-server
+ && git clone -n https://github.com/kuklinistvan/anki-sync-server . \
+ && git checkout ${SERVER_COMMIT} \
+ && mv ankisyncd.conf ankisyncd.conf.example \
+ && ln -s /app/config/ankisyncd.conf . \
+# Install anki
+ && git clone -n https://github.com/dae/anki.git ./anki-bundled \
+ && git --work-tree="anki-bundled" --git-dir="anki-bundled/.git" checkout ${ANKI_COMMIT} \
+ && pip install --no-cache-dir -r ./anki-bundled/requirements.txt \
+# Give the app to ankisync user
+ && chown -R ankisync:ankisync /app \
+ && chmod 700 /app \
+# Cleanup
+ && apk del .install-deps \
+ && rm -rf \
+        /app/anki-sync-server/.git* \
+        /app/anki-sync-server/anki-bundled/.git*
 
-RUN mkdir /app/data && \
-    mv /app/anki-sync-server/ankisyncd.conf /app/anki-sync-server/ankisyncd.conf.example && \
-    ln -s /app/data/ankisyncd.conf /app/anki-sync-server/
+USER ankisync
 
-COPY config /app/config
-COPY scripts /app/scripts
-
-CMD /app/scripts/startup.sh
+ENTRYPOINT ["/bin/sh","/app/scripts/startup.sh"]
 
 EXPOSE 27701
 
