@@ -104,10 +104,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-# Djankiserv values
-
-# if you change this, it must also be changed in the images/static/Dockerfile
-STATIC_ROOT = "build/static"
+STATIC_ROOT = "static"
 
 # This is required as Django will add a slash and redirect to that by default, and our clients don't
 # support that

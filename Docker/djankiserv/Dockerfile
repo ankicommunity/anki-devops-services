@@ -14,7 +14,7 @@ RUN apk add mariadb-connector-c-dev postgresql-dev gcc musl-dev
 RUN pip3 install --index-url "${INDEX_URL}" --trusted-host "${TRUSTED_HOST}" djankiserv
 
 #RUN cp '/usr/local/lib/python3.8/site-packages/django/conf/project_template/manage.py-tpl' '/usr/bin/manage'
-COPY manage.py /usr/bin/manage
+#COPY manage.py /usr/bin/manage
 #CMD /usr/bin/manage migrate 
 
 
@@ -23,7 +23,7 @@ COPY manage.py /usr/bin/manage
 RUN mkdir -p /home/app
 
 # Create an app user so our program doesn't run as root.
-RUN addgroup -S app && adduser -S app -G app
+RUN addgroup -S app && adduser -S app -G app -s /bin/sh
 
 # RUN groupadd -r app &&\
 #     useradd -r -g app -d /home/app -s /sbin/nologin -c "Docker image user" app
@@ -34,17 +34,22 @@ ENV APP_HOME=/home/app/
 #RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-USER app
+RUN apk add coreutils sudo
+
+# USER app
 
 RUN django-admin startproject mysite
+ENV PATH "$PATH:/home/app/mysite"
+
 #COPY settings.py mysite/mysite/settings.py
 
 COPY views.py mysite/mysite/views.py
 
 CMD cp /persistence/settings.py mysite/mysite/settings.py && \
+    cd "$HOME" && yes yes | manage.py collectstatic && chmod 755 -R /home/app/static && \
     cp /persistence/urls.py mysite/mysite/urls.py && \
-        ./mysite/manage.py migrate && \
-        ./mysite/manage.py runserver 0.0.0.0:8080
+        sudo -u app -H manage.py migrate && \
+        sudo -u app -H manage.py runserver 0.0.0.0:8080
 
 EXPOSE 8080
 

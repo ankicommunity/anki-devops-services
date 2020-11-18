@@ -5,6 +5,7 @@ services:
     restart: always
     volumes:
       - ./djankiserv_persistence:/persistence
+      - djankiserv-static:/home/app/static
 
   postgresdb:
     image: postgres
@@ -14,6 +15,17 @@ services:
       POSTGRES_PASSWORD: PLEASE_CHANGE_POSTGRES_PASSWORD
     volumes:
       - ./postgres_persistence:/var/lib/postgresql/data
+
+  nginx_web:
+    image: nginx
+    restart: always
+    volumes:
+      - djankiserv-static:/usr/share/nginx/html/static
+    ports:
+      - 8080:80
+
+volumes:
+     djankiserv-static: 
 
 
 # volumes:
