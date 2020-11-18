@@ -11,4 +11,7 @@ urlpatterns = [
     path("djs/", include("djankiserv.urls")),
     path("health", views.health),
     path("admin/", admin.site.urls),
+
+    # If you are editing the djankiserv-postgres-nginx configuration,
+    # don't forget to check nginx_default.conf for the reveverse proxy configuration.
 ]
