@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  djankiserv:
+    image: ${DOCKER_IMAGE_ORG}/${DOCKER_IMAGE}
+    restart: always
+    volumes:
+      - ./djankiserv_persistence:/persistence
+
+  postgresdb:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: djankiserv
+      POSTGRES_PASSWORD: PLEASE_CHANGE_POSTGRES_PASSWORD
+    volumes:
+      - ./postgres_persistence:/var/lib/postgresql/data
+
+
+# volumes:
+#   logvolume01: {}

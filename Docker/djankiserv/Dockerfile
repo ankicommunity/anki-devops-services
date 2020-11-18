@@ -39,8 +39,10 @@ USER app
 RUN django-admin startproject mysite
 #COPY settings.py mysite/mysite/settings.py
 
+COPY views.py mysite/mysite/views.py
 
 CMD cp /persistence/settings.py mysite/mysite/settings.py && \
+    cp /persistence/urls.py mysite/mysite/urls.py && \
         ./mysite/manage.py migrate && \
         ./mysite/manage.py runserver 0.0.0.0:8080
 
