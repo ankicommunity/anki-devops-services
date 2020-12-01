@@ -4,7 +4,7 @@ services:
     image: ${DOCKER_IMAGE_ORG}/${DOCKER_IMAGE}
     restart: always
     volumes:
-      - ./djankiserv_persistence:/persistence
+      - ./djankiserv_config:/persistence
       - djankiserv-static:/home/app/static
 
   postgresdb:

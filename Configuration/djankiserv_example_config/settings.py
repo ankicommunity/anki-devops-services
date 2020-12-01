@@ -8,15 +8,39 @@ from copy import deepcopy
 import djankiserv.unki
 from djankiserv.unki.database import MariadbAnkiDataModel, PostgresAnkiDataModel
 
+
+# ------------------------------------ Configuration - the mandatory part --------------------------------------
+
+
+# You may set this to a more strict value
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = os.getenv("DJANKISERV_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+# ALLOWED_HOSTS += [socket.gethostbyname(socket.gethostname())]  # for kubernetes probes
+
+
+SECRET_KEY = "a_very_secretive_key"
+raise "Please change default password in settings.py and docker-compose.yml.in! (1. occurence)"  # then remove me
+
+
+POSTGRES_CONFIGURATION = {
+    "ENGINE": "django.db.backends.postgresql",
+    "NAME": "djankiserv",
+    "USER": "djankiserv",
+    "PASSWORD": "PLEASE_CHANGE_POSTGRES_PASSWORD",       # <--------- IMPORTANT --------------- !!!
+    "HOST": "postgresdb",
+    "PORT": "5432",
+}
+raise "Please change default password in settings.py and docker-compose.yml.in! (2. occurence)"  # then remove me
+
+
+
+# -------------------------------- End of the mandatory part -----------------------------------------------------
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
-SECRET_KEY = os.getenv("DJANKISERV_SECRET_KEY", "a_very_secretive_key")
-
-ALLOWED_HOSTS = ['*']
-
-# ALLOWED_HOSTS = os.getenv("DJANKISERV_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-# ALLOWED_HOSTS += [socket.gethostbyname(socket.gethostname())]  # for kubernetes probes
 
 INSTALLED_APPS = [
     # core
@@ -64,17 +88,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "mysite.wsgi.application"
 
 DATABASES = {}
-
-#raise "Please change default password in settings.py and docker-compose.yml.in!"  # then remove me
-
-DATABASES["default"] = {
-    "ENGINE": "django.db.backends.postgresql",
-    "NAME": "djankiserv",
-    "USER": "djankiserv",
-    "PASSWORD": "PLEASE_CHANGE_POSTGRES_PASSWORD",       # <--------- IMPORTANT --------------- !!!
-    "HOST": "postgresdb",
-    "PORT": "5432",
-}
+DATABASES["default"] = POSTGRES_CONFIGURATION
 
 djankiserv.unki.AnkiDataModel = PostgresAnkiDataModel
 DATABASES["userdata"] = deepcopy(DATABASES["default"])
