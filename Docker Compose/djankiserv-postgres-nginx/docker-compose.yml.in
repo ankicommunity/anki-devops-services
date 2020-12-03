@@ -11,7 +11,7 @@ services:
     image: postgres:9.6:20
     restart: always
     environment:
-      POSTGRES_USER: "${DJANKISERV_DATABASE_USER}"
+      POSTGRES_USER: djankiserv
       POSTGRES_PASSWORD: "${DJANKISERV_DATABASE_PASSWORD}"
     volumes:
       - ./postgres_persistence:/var/lib/postgresql/data

@@ -1,1 +1,3 @@
 docker-compose.yml
+djankiserv_config
+postgres_persistence

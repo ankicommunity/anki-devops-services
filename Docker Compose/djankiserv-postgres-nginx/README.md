@@ -12,17 +12,16 @@ A self-contained configuration, ready for deployment.
 
 ## Usage
 
-1. Modify and source `"$REPOSITORY_ROOT"/Configuration/djankiserv.vars` according to your needs.
+1. Modify and source `"$REPOSITORY_ROOT"/Configuration/djankiserv.vars` according to your needs. Don't forget to alter the passwords!
 2. Optionally, build the `djankiserv` by hand, image following `"$REPOSITORY_ROOT"/Docker/djankiserv/README`.
 3. Run `generate_docker_compose_yml.sh`*
-
-    <sup>You can run `generate_docker_compose_yml_oneclick.sh`, which is going to use the variables defined
-    in `"$REPOSITORY_ROOT"/Configuration/djankiserv.vars` automatically.</sup>
-
-4. **Important!** Alter the passwords in these files:
-
-    * `settings.py`
-    * `docker-compose.yml` (generated one)
+4. Run `generate_django_config.sh`*
+    
+    <sup>You can run the `*_oneclick.sh` versions of these scripts, which are
+    going to use the variables defined in
+    `"$REPOSITORY_ROOT"/Configuration/djankiserv.vars` and
+    `"$REPOSITORY_ROOT"/Configuration/djankiserv_compose.vars`
+    automatically.</sup>
 
 5. Start the compose instance:
 

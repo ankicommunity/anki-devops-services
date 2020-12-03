@@ -7,6 +7,7 @@ from copy import deepcopy
 
 import djankiserv.unki
 from djankiserv.unki.database import MariadbAnkiDataModel, PostgresAnkiDataModel
+import my_secrets
 
 
 # ------------------------------------ Configuration - the mandatory part --------------------------------------
@@ -26,12 +27,10 @@ POSTGRES_CONFIGURATION = {
     "ENGINE": "django.db.backends.postgresql",
     "NAME": "djankiserv",
     "USER": "djankiserv",
-    "PASSWORD": "PLEASE_CHANGE_POSTGRES_PASSWORD",       # <--------- IMPORTANT --------------- !!!
+    "PASSWORD": my_secrets.DATABASE_PASSWORD,
     "HOST": "postgresdb",
     "PORT": "5432",
 }
-raise "Please change default password in settings.py and docker-compose.yml.in! (2. occurence)"  # then remove me
-
 
 
 # -------------------------------- End of the mandatory part -----------------------------------------------------

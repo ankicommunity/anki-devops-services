@@ -5,6 +5,5 @@ cd "$DIR"
 set -e
 set -x
 
-. ../../../Configuration/djankiserv.vars && \
 . ../../../Configuration/djankiserv_compose.vars && \
-./generate_docker_compose_yml.sh
+./generate_django_config.sh
