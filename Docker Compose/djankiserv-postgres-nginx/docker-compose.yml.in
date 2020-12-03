@@ -8,16 +8,16 @@ services:
       - djankiserv-static:/home/app/static
 
   postgresdb:
-    image: postgres
+    image: postgres:9.6:20
     restart: always
     environment:
-      POSTGRES_USER: djankiserv
-      POSTGRES_PASSWORD: PLEASE_CHANGE_POSTGRES_PASSWORD
+      POSTGRES_USER: "${DJANKISERV_DATABASE_USER}"
+      POSTGRES_PASSWORD: "${DJANKISERV_DATABASE_PASSWORD}"
     volumes:
       - ./postgres_persistence:/var/lib/postgresql/data
 
   nginx_web:
-    image: nginx
+    image: nginx:1.19.5
     restart: always
     volumes:
       - djankiserv-static:/usr/share/nginx/html/static
@@ -27,7 +27,3 @@ services:
 
 volumes:
      djankiserv-static: 
-
-
-# volumes:
-#   logvolume01: {}

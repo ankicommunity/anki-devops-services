@@ -6,11 +6,11 @@
 
 ## Repository contents
 
-| Directory | Description |
-|--------|-------------|
-| `Docker/` | Individual Docker images. |
-| `Docker Compose/` | Easy-to-use Docker configurations with instructions*, ready for deployment. |
-| `Configuration` | See below. |
+| Directory            | Description                                                                  |
+|----------------------|------------------------------------------------------------------------------|
+| `Docker Compose/`    | Easy-to-use Docker configurations with instructions*, ready for deployment.  |
+| `Docker/`            | Individual Docker images.                                                    |
+| `Configuration`      | Configure your server with these files (see below).                          |
 
 <sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup>
 
@@ -23,8 +23,12 @@ You may find various files under the `Configuration/` directory:
 
 * Example configurations of the setup will require you to copy and customize.
 
-## Support
+## Community support
 
 **For detailed tutorials and news, visit us at [ankicommunity.github.io](https://ankicommunity.github.io/)!**
 
 We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/community).
+
+## Limitation of responsibility
+
+<sup>*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*</sup>
