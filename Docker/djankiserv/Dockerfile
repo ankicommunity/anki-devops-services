@@ -27,8 +27,9 @@ ENV PATH "$PATH:/home/app/mysite"
 COPY views.py mysite/mysite/views.py
 
 CMD cp /persistence/settings.py mysite/mysite/settings.py && \
-    cd "$HOME" && yes yes | manage.py collectstatic && chmod 755 -R /home/app/static && \
+    cp /persistence/mysecrets.py mysite/mysite/mysecrets.py && \
     cp /persistence/urls.py mysite/mysite/urls.py && \
+    cd "$HOME" && yes yes | manage.py collectstatic && chmod 755 -R /home/app/static && \
         sudo -u app -H manage.py migrate && \
         sudo -u app -H manage.py runserver 0.0.0.0:8080
 

@@ -17,9 +17,5 @@ fi
 mkdir -p "$DJANKISERV_CONFIG_DIR"
 cp -r "$DJANKISERV_EXAMPLE_CONFIG_DIR"/* "$DJANKISERV_CONFIG_DIR"
 
-echo "DATABASE_PASSWORD=$DJANKISERV_DATABASE_PASSWORD" > "$DJANKISERV_CONFIG_DIR"/my_secrets.py
-
-# envsubst < "$DIR"/generate_django_config/postgres_password.patch.orig > "$DIR"/generate_django_config/postgres_password.patch
-# patch -D "$DJANKISERV_CONFIG_DIR" -i "$DIR"/generate_django_config/postgres_password.patch
-
-# should create a secret.py instead...
+echo "DATABASE_PASSWORD=\"$DJANKISERV_DATABASE_PASSWORD\"" > "$DJANKISERV_CONFIG_DIR"/mysecrets.py
+echo "DJANGO_SECRET_KEY=\"$DJANKISERV_DJANGO_SECRET_KEY\"" >> "$DJANKISERV_CONFIG_DIR"/mysecrets.py

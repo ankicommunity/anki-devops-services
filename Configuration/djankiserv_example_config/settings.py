@@ -7,8 +7,10 @@ from copy import deepcopy
 
 import djankiserv.unki
 from djankiserv.unki.database import MariadbAnkiDataModel, PostgresAnkiDataModel
-import my_secrets
 
+import sys
+sys.path.insert(0,os.path.dirname(__file__))
+from . import mysecrets
 
 # ------------------------------------ Configuration - the mandatory part --------------------------------------
 
@@ -19,15 +21,13 @@ ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS += [socket.gethostbyname(socket.gethostname())]  # for kubernetes probes
 
 
-SECRET_KEY = "a_very_secretive_key"
-raise "Please change default password in settings.py and docker-compose.yml.in! (1. occurence)"  # then remove me
-
+SECRET_KEY = mysecrets.DJANGO_SECRET_KEY
 
 POSTGRES_CONFIGURATION = {
     "ENGINE": "django.db.backends.postgresql",
     "NAME": "djankiserv",
     "USER": "djankiserv",
-    "PASSWORD": my_secrets.DATABASE_PASSWORD,
+    "PASSWORD": mysecrets.DATABASE_PASSWORD,
     "HOST": "postgresdb",
     "PORT": "5432",
 }
