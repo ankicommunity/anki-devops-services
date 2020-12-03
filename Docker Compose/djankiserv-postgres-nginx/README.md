@@ -35,3 +35,14 @@ A self-contained configuration, ready for deployment.
     ```
     docker-compose up -d
     ```
+
+Now you should be able to access the management interface at the
+`http://your_ip:8080/admin/` resource. To learn about creating a superuser
+account, proceed to the `README` of the `djankiserv` Docker image.
+
+## Anki API endpoints
+
+To configure the clients, specify these urls:
+
+* `http://your_ip:8080/djs/`
+* `http://your_ip:8080/djs/msync/`

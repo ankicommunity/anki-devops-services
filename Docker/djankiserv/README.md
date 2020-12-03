@@ -14,7 +14,7 @@ preconfigured in docker-compose), then read along.
   `"$REPOSITORY_ROOT"/Configuration/djankiserv_example_config` and alter them to
   fit your setup. Mount them under `/persistence` in the container. 
 
-  * Be sure to change the database and the Django password in `settings.py`. The
+  * Be sure to change the database and the Django password in `mysecrets.py`. The
     server is going to raise an exception otherwise. ;)
 
 * At startup, the cointainer is going to generate the static content for you under
@@ -27,6 +27,30 @@ preconfigured in docker-compose), then read along.
 * According to the [`djankiserv`](https://github.com/ankicommunity/djankiserv)
   documentation, a reverse proxy is *needed* in front of the Django web server.
 
+### Management interface
+
+At the `/admin/` resource a web interface is available. You can access it with a
+superuser account, that can be created from the container shell using the Django
+CLI management utilities:
+
+    $ docker exec -it <CONTAINER_ID> sh
+
+    # manage.py createsuperuser
+    Username (leave blank to use 'root'): 
+    Email address: 
+    Password: 
+    Password (again): 
+    The password is too similar to the username.
+    This password is too short. It must contain at least 8 characters.
+    This password is too common.
+    Bypass password validation and create user anyway? [y/N]: y
+    Superuser created successfully.
+
+  
+### Anki API endpoints
+
+Anki synchronization endpoints are available at `/djs/` and `/djs/mysnc/`
+resources. 
 
 ## Building
 
