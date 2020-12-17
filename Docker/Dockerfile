@@ -1,27 +1,44 @@
-FROM library/python:3.7.0-alpine3.8
+# -- BUILDER --
 
-RUN apk add build-base
-RUN apk add portaudio-dev
-RUN apk add sqlite
-RUN pip install webob
+FROM library/python:3.7-buster as builder
 
-COPY anki-sync-server /app/anki-sync-server
+RUN apt-get update && apt-get install -y portaudio19-dev sqlite3
+
+RUN mkdir /install
+
+WORKDIR /install
+
+COPY anki-sync-server/src/requirements.txt /install/requirements.txt
+
+RUN pip install --upgrade pip && \
+    pip install --prefix=/usr --root /install -r /install/requirements.txt
+
+# -- DEPLOYER --
+
+FROM debian:buster-slim as deployer
+
+RUN apt-get update -y && \
+    apt-get install -y python3 libportaudio2 sqlite3 && \
+    apt-get autoclean
+
+COPY --from=builder /install/usr/lib/python3.7/site-packages/ /usr/lib/python3.7/dist-packages/
+
+COPY anki-sync-server/src /app/anki-sync-server
 
 WORKDIR /app/anki-sync-server
-
-RUN \
-    cd anki-bundled && \
-    pip install -r requirements.txt
 
 RUN mkdir /app/data && \
     mv /app/anki-sync-server/ankisyncd.conf /app/anki-sync-server/ankisyncd.conf.example && \
     ln -s /app/data/ankisyncd.conf /app/anki-sync-server/
 
 COPY config /app/config
+
 COPY scripts /app/scripts
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 CMD /app/scripts/startup.sh
 
 EXPOSE 27701
 
-HEALTHCHECK --interval=5s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
+#HEALTHCHECK --interval=60s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
