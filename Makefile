@@ -7,7 +7,7 @@ ANKI_DEVOPS_VERSION ?= "v0.1.0"
 ANKI_DEVOPS_DESCRIPTION ?= "Images and Containers for Anki Community services."
 
 ENV := local
--include "${ANKI_DEVOPS_PATH}/config/.env.${ENV}"
+-include ${ANKI_DEVOPS_PATH}/config/.env.${ENV}
 export
 
 .DEFAULT_GOAL := help-devops
