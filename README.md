@@ -2,8 +2,6 @@
 
 <img title="" src="ac_header.png" alt="Easy-to-use container configurations brought to you by Anki Community" width="898" data-align="center">
 
-
-
 ## Repository contents
 
 | Services           | Description |
@@ -39,9 +37,6 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 
 [Learn more about what "tested" means here.](Testing.md)
 
-
-
-
 ### About this Docker image
 
 * As of yet, it lives on DockerHub at [kuklinistvan/anki-sync-server:latest](https://hub.docker.com/r/kuklinistvan/anki-sync-server).
@@ -68,7 +63,6 @@ data:
 ```
 
 #### Rebuilding the image
-
 
 First to clone the repository and update the anki-sync-server:
 
