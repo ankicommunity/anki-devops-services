@@ -11,8 +11,7 @@
 | `djankiserv`       | An self-hosted Anki server with a complete API. |
 | `anki-sync-server` | An self-hosted Anki server with basic Sync functionality. |
 
-<sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup>
-
+<p><sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup></p>
 
 ### Configuration files
 
@@ -30,7 +29,8 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 
 ## Limitation of responsibility
 
-<sup>*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*</sup>
+<p><sup>*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*</sup></p>
+
 ### Tested and works on
 
 |    Date    | AnkiDesktop version | AnkiDroid version |                      ankisyncd version                       | Tester       |
