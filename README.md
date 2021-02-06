@@ -6,18 +6,17 @@
 
 ## Repository contents
 
-| Directory            | Description                                                                  |
-|----------------------|------------------------------------------------------------------------------|
-| `Docker Compose/`    | Easy-to-use Docker configurations with instructions*, ready for deployment.  |
-| `Docker/`            | Individual Docker images.                                                    |
-| `Configuration`      | Configure your server with these files (see below).                          |
+| Services           | Description |
+|--------------------|-------------|
+| `djankiserv`       | An self-hosted Anki server with a complete API. |
+| `anki-sync-server` | An self-hosted Anki server with basic Sync functionality. |
 
 <sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup>
 
 
 ### Configuration files
 
-You may find various files under the `Configuration/` directory:
+You may find various files under the `config/` directory:
 
 * Environment variables to source before using the images. Our shell scripts are going to remind you which of these are needed for a particular setup. You may inspect the contents of such a file before sourcing.
 
