@@ -2,22 +2,18 @@
 
 <img title="" src="ac_header.png" alt="Easy-to-use container configurations brought to you by Anki Community" width="898" data-align="center">
 
-
-
 ## Repository contents
 
-| Directory            | Description                                                                  |
-|----------------------|------------------------------------------------------------------------------|
-| `Docker Compose/`    | Easy-to-use Docker configurations with instructions*, ready for deployment.  |
-| `Docker/`            | Individual Docker images.                                                    |
-| `Configuration`      | Configure your server with these files (see below).                          |
+| Services           | Description |
+|--------------------|-------------|
+| `djankiserv`       | An self-hosted Anki server with a complete API. |
+| `anki-sync-server` | An self-hosted Anki server with basic Sync functionality. |
 
-<sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup>
-
+<p><sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup></p>
 
 ### Configuration files
 
-You may find various files under the `Configuration/` directory:
+You may find various files under the `config/` directory:
 
 * Environment variables to source before using the images. Our shell scripts are going to remind you which of these are needed for a particular setup. You may inspect the contents of such a file before sourcing.
 
@@ -31,7 +27,8 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 
 ## Limitation of responsibility
 
-<sup>*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*</sup>
+<p><sup>*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*</sup></p>
+
 ### Tested and works on
 
 |    Date    | AnkiDesktop version | AnkiDroid version |                      ankisyncd version                       | Tester       |
@@ -39,9 +36,6 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 | 2020-02-06 |       2.1.19        |       2.9.1       | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
 
 [Learn more about what "tested" means here.](Testing.md)
-
-
-
 
 ### About this Docker image
 
@@ -69,7 +63,6 @@ data:
 ```
 
 #### Rebuilding the image
-
 
 First to clone the repository and update the anki-sync-server:
 
