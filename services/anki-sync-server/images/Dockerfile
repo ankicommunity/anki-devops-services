@@ -16,7 +16,7 @@ RUN pip install --upgrade pip && \
 
 # -- DEPLOYER --
 
-FROM debian:buster-slim as deployer
+FROM debian:buster-slim
 
 ARG ANKISYNCD_PORT
 ARG ANKISYNCD_DATA_PORT
