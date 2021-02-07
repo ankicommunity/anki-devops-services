@@ -41,11 +41,11 @@ RUN mkdir /app/data && \
 
 COPY config /app/config
 
-COPY scripts /app/scripts
+COPY bin /app/bin
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-CMD /app/scripts/startup.sh
+CMD /app/bin/startup.sh
 
 EXPOSE 27701
 
