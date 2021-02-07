@@ -5,14 +5,14 @@ FROM library/python:3.7-buster as builder
 RUN apt-get update && \
 	apt-get install -y sqlite3
 
-RUN mkdir /install
+ARG ANKISYNCD_ROOT=/opt/ankisyncd
+RUN mkdir -p ${ANKISYNCD_ROOT}
+WORKDIR ${ANKISYNCD_ROOT}
 
-WORKDIR /install
+COPY release/src/requirements.txt src/requirements.txt
 
-COPY anki-sync-server/src/requirements.txt /install/requirements.txt
-
-RUN pip install --upgrade pip && \
-    pip install --prefix=/usr --root /install -r /install/requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install -r src/requirements.txt
 
 # -- DEPLOYER --
 
