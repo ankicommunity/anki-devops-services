@@ -17,6 +17,13 @@ RUN pip install --upgrade pip && \
 
 FROM debian:buster-slim as deployer
 
+ARG ANKISYNCD_PORT
+ARG ANKISYNCD_DATA_PORT
+ARG ANKISYNCD_BASE_URL
+ARG ANKISYNCD_BASE_MEDIA_URL
+ARG ANKISYNCD_AUTH_DB_PATH
+ARG ANKISYNCD_SESSION_DB_PATH
+
 RUN apt-get update -y && \
     apt-get install -y python3 libportaudio2 sqlite3 && \
     apt-get autoclean
