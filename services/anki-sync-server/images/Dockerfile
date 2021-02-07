@@ -2,9 +2,6 @@
 
 FROM library/python:3.7-buster as builder
 
-RUN apt-get update && \
-	apt-get install -y sqlite3
-
 ARG ANKISYNCD_ROOT=/opt/ankisyncd
 RUN mkdir -p ${ANKISYNCD_ROOT}
 WORKDIR ${ANKISYNCD_ROOT}
