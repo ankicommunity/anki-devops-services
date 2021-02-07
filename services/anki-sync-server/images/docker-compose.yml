@@ -2,7 +2,7 @@ version: '3.7'
 services:
 
   anki_sync_server:
-    image: anki-sync-server:latest
+    image: ${DOCKER_IMAGE:-anki-sync-server}:${DOCKER_VERSION:-latest}
     build:
       context: .
       dockerfile: Dockerfile

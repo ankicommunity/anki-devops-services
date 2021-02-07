@@ -1,5 +1,4 @@
 # -- BUILDER --
-
 FROM library/python:3.7-buster as builder
 
 ARG ANKISYNCD_ROOT=/opt/ankisyncd
@@ -8,14 +7,23 @@ WORKDIR ${ANKISYNCD_ROOT}
 
 COPY bin ./bin
 
+ARG PYTHONUSERBASE=/opt/venv
 RUN sh ./bin/download-release.sh && \
 	pip3 install --upgrade pip && \
-    pip3 install -r ./release/requirements.txt
+    pip3 install --user -r ./release/requirements.txt
 
 # -- DEPLOYER --
-
 FROM debian:buster-slim
 
+# Copy Python dependencies
+COPY --from=builder ${PYTHONUSERBASE} ${PYTHONUSERBASE}
+
+# Copy Anki Sync Server release and scripts
+ARG ANKISYNCD_ROOT=/opt/ankisyncd
+COPY --from=builder ${ANKISYNCD_ROOT} ${ANKISYNCD_ROOT}
+WORKDIR ${ANKISYNCD_ROOT}
+
+# Set default environment variables.
 ARG ANKISYNCD_PORT
 ARG ANKISYNCD_DATA_ROOT
 ARG ANKISYNCD_BASE_URL
@@ -23,28 +31,16 @@ ARG ANKISYNCD_BASE_MEDIA_URL
 ARG ANKISYNCD_AUTH_DB_PATH
 ARG ANKISYNCD_SESSION_DB_PATH
 
-RUN apt-get update -y && \
-    apt-get install -y python3 sqlite3 && \
-    apt-get autoclean
+ENV ANKISYNCD_HOST=0.0.0.0 \
+	ANKISYNCD_PORT=${ANKISYNCD_PORT} \
+	ANKISYNCD_DATA_ROOT=${ANKISYNCD_DATA_ROOT} \
+	ANKISYNCD_BASE_URL=${ANKISYNCD_BASE_URL} \
+	ANKISYNCD_BASE_MEDIA_URL=${ANKISYNCD_BASE_MEDIA_URL} \
+	ANKISYNCD_AUTH_DB_PATH=${ANKISYNCD_AUTH_DB_PATH} \
+	ANKISYNCD_SESSION_DB_PATH=${ANKISYNCD_SESSION_DB_PATH}
 
-COPY --from=builder /install/usr/lib/python3.7/site-packages/ /usr/lib/python3.7/dist-packages/
+EXPOSE ${ANKISYNCD_PORT}
 
-COPY anki-sync-server/src /app/anki-sync-server
+CMD ["/bin/sh", "./bin/startup.sh"]
 
-WORKDIR /app/anki-sync-server
-
-RUN mkdir /app/data && \
-    mv /app/anki-sync-server/ankisyncd.conf /app/anki-sync-server/ankisyncd.conf.example && \
-    ln -s /app/data/ankisyncd.conf /app/anki-sync-server/
-
-COPY config /app/config
-
-COPY bin /app/bin
-
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
-CMD /app/bin/startup.sh
-
-EXPOSE 27701
-
-#HEALTHCHECK --interval=60s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
+HEALTHCHECK --interval=60s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
