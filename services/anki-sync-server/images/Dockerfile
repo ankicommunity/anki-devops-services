@@ -9,10 +9,11 @@ ARG ANKISYNCD_ROOT=/opt/ankisyncd
 RUN mkdir -p ${ANKISYNCD_ROOT}
 WORKDIR ${ANKISYNCD_ROOT}
 
-COPY release/src/requirements.txt src/requirements.txt
+COPY bin ./bin
 
-RUN pip3 install --upgrade pip && \
-    pip3 install -r src/requirements.txt
+RUN sh ./bin/download-release.sh && \
+	pip3 install --upgrade pip && \
+    pip3 install -r ./release/requirements.txt
 
 # -- DEPLOYER --
 
