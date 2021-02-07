@@ -21,3 +21,9 @@ build: build-devops # alias for quick access
 build-devops:
 	@cd "${ANKI_DEVOPS_PATH}" && \
 	${DOCKER_COMPOSE} build
+
+.PHONY: run-devops #: Run examples.
+run: run-devops # alias for quick access
+run-devops:
+	@cd "${ANKI_DEVOPS_PATH}" && \
+	${DOCKER_COMPOSE} up
