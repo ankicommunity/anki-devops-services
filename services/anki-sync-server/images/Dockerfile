@@ -2,7 +2,8 @@
 
 FROM library/python:3.7-buster as builder
 
-RUN apt-get update && apt-get install -y portaudio19-dev sqlite3
+RUN apt-get update && \
+	apt-get install -y sqlite3
 
 RUN mkdir /install
 
@@ -25,7 +26,7 @@ ARG ANKISYNCD_AUTH_DB_PATH
 ARG ANKISYNCD_SESSION_DB_PATH
 
 RUN apt-get update -y && \
-    apt-get install -y python3 libportaudio2 sqlite3 && \
+    apt-get install -y python3 sqlite3 && \
     apt-get autoclean
 
 COPY --from=builder /install/usr/lib/python3.7/site-packages/ /usr/lib/python3.7/dist-packages/
