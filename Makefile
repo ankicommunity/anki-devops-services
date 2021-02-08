@@ -16,14 +16,15 @@ help: help-devops # alias for quick access
 help-devops:
 	@cd "${ANKI_DEVOPS_PATH}" && awk 'BEGIN {FS = " ?#?: "; print ""${ANKI_DEVOPS_NAME}" "${ANKI_DEVOPS_VERSION}"\n"${ANKI_DEVOPS_DESCRIPTION}"\n\nUsage: make \033[36m<command>\033[0m\n\nCommands:"} /^.PHONY: ?[a-zA-Z_-]/ { printf "  \033[36m%-10s\033[0m %s\n", $$2, $$3 }' $(MAKEFILE_LIST)
 
-.PHONY: build-devops #: Build images.
-build: build-devops # alias for quick access
-build-devops:
-	@cd "${ANKI_DEVOPS_PATH}" && \
-	${DOCKER_COMPOSE} build
-
 .PHONY: run-devops #: Run examples.
 run: run-devops # alias for quick access
 run-devops:
 	@cd "${ANKI_DEVOPS_PATH}" && \
-	${DOCKER_COMPOSE} up
+	${BASH} scripts/run-devops.sh
+
+.PHONY: build-devops #: Build images.
+build: build-devops # alias for quick access
+build-devops:
+	@cd "${ANKI_DEVOPS_PATH}" && \
+	${BASH} scripts/build-devops.sh
+
