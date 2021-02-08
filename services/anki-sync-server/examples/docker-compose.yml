@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+
+  anki_sync_server:
+    image: ${DOCKER_IMAGE:-anki-sync-server}:${DOCKER_VERSION:-latest}
+    container_name: anki_sync_server_27701
+    ports:
+      - ${ANKISYNCD_PORT:-27701}:${ANKISYNCD_PORT:-27701}
+    # environment:
+      # - ANKISYNCD_PORT=${ANKISYNCD_PORT:-27701}
+      # - ANKISYNCD_DATA_ROOT=${ANKISYNCD_DATA_ROOT}
+      # - ANKISYNCD_BASE_URL=${ANKISYNCD_BASE_URL}
+      # - ANKISYNCD_BASE_MEDIA_URL=${ANKISYNCD_BASE_MEDIA_URL}
+      # - ANKISYNCD_AUTH_DB_PATH=${ANKISYNCD_AUTH_DB_PATH}
+      # - ANKISYNCD_SESSION_DB_PATH=${ANKISYNCD_SESSION_DB_PATH}
+    volumes:
+      - ../instances/anki_sync_server_27701:/srv/ankisyncd
+    command:
+      - lsuser
+    restart: always
+    stdin_open: true
+    tty: true
+
+  
