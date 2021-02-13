@@ -9,7 +9,7 @@
 | `djankiserv`       | An self-hosted Anki server with a complete API. |
 | `anki-sync-server` | An self-hosted Anki server with basic Sync functionality. |
 
-<p><sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup></p>
+<p><sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at <a href="https://ankicommunity.github.io/Tutorials/Docker/Howto/">ankicommunity.github.io</a>.</sup></p>
 
 ### Configuration files
 
