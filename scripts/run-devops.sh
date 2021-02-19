@@ -8,10 +8,6 @@ run_example () {
 
 	pushd services/${SERVICE}/examples > /dev/null
 	
-	echo "--- Overriding example with local image"
-	export COMPOSE_PATH_SEPARATOR=:
-	export COMPOSE_FILE=../images/docker-compose.yml
-	
 	echo "--- Running Docker Examples."
 	docker-compose up ${CONTAINER}
 
