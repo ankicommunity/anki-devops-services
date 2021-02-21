@@ -1,44 +1,55 @@
 # -- BUILDER --
+FROM library/python:3.9-buster as builder
 
-FROM library/python:3.7-buster as builder
+ARG ANKISYNCD_ROOT=/opt/ankisyncd
+RUN mkdir -p ${ANKISYNCD_ROOT}
+WORKDIR ${ANKISYNCD_ROOT}
 
-RUN apt-get update && apt-get install -y portaudio19-dev sqlite3
+COPY bin/download-release.sh ./bin/download-release.sh
 
-RUN mkdir /install
-
-WORKDIR /install
-
-COPY anki-sync-server/src/requirements.txt /install/requirements.txt
-
-RUN pip install --upgrade pip && \
-    pip install --prefix=/usr --root /install -r /install/requirements.txt
+ARG PYTHONUSERBASE=/opt/venv
+RUN sh ./bin/download-release.sh && \
+	pip3 install --upgrade pip && \
+    pip3 install --user -r ./release/requirements.txt
 
 # -- DEPLOYER --
+FROM python:3.9-slim-buster
 
-FROM debian:buster-slim as deployer
+# Copy Python dependencies
+ARG PYTHONUSERBASE=/opt/venv
+ENV PYTHONUSERBASE=${PYTHONUSERBASE}
+COPY --from=builder ${PYTHONUSERBASE} ${PYTHONUSERBASE}
 
-RUN apt-get update -y && \
-    apt-get install -y python3 libportaudio2 sqlite3 && \
-    apt-get autoclean
+# Copy Anki Sync Server release and scripts
+ARG ANKISYNCD_ROOT=/opt/ankisyncd
+COPY --from=builder ${ANKISYNCD_ROOT}/release ${ANKISYNCD_ROOT}
+WORKDIR ${ANKISYNCD_ROOT}
 
-COPY --from=builder /install/usr/lib/python3.7/site-packages/ /usr/lib/python3.7/dist-packages/
+# Create data volume.
+ARG ANKISYNCD_DATA_ROOT=/srv/ankisyncd
+RUN mkdir -p ${ANKISYNCD_DATA_ROOT}
+VOLUME ${ANKISYNCD_DATA_ROOT}
 
-COPY anki-sync-server/src /app/anki-sync-server
+# Set default environment variables.
+ARG ANKISYNCD_PORT=27701
+ARG ANKISYNCD_BASE_URL=/sync/
+ARG ANKISYNCD_BASE_MEDIA_URL=/msync/
+ARG ANKISYNCD_AUTH_DB_PATH=./auth.db
+ARG ANKISYNCD_SESSION_DB_PATH=./session.db
 
-WORKDIR /app/anki-sync-server
+ENV ANKISYNCD_HOST=0.0.0.0 \
+	ANKISYNCD_PORT=${ANKISYNCD_PORT} \
+	ANKISYNCD_DATA_ROOT=${ANKISYNCD_DATA_ROOT} \
+	ANKISYNCD_BASE_URL=${ANKISYNCD_BASE_URL} \
+	ANKISYNCD_BASE_MEDIA_URL=${ANKISYNCD_BASE_MEDIA_URL} \
+	ANKISYNCD_AUTH_DB_PATH=${ANKISYNCD_AUTH_DB_PATH} \
+	ANKISYNCD_SESSION_DB_PATH=${ANKISYNCD_SESSION_DB_PATH}
 
-RUN mkdir /app/data && \
-    mv /app/anki-sync-server/ankisyncd.conf /app/anki-sync-server/ankisyncd.conf.example && \
-    ln -s /app/data/ankisyncd.conf /app/anki-sync-server/
+COPY bin/entrypoint.sh ./bin/entrypoint.sh
 
-COPY config /app/config
+EXPOSE ${ANKISYNCD_PORT}
 
-COPY scripts /app/scripts
+# TODO: Change to ENTRYPOINT. Currently CMD to allow shell access if needed.
+CMD ["/bin/sh", "./bin/entrypoint.sh"]
 
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
-CMD /app/scripts/startup.sh
-
-EXPOSE 27701
-
-#HEALTHCHECK --interval=60s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
+HEALTHCHECK --interval=60s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
