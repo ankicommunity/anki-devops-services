@@ -1,0 +1,55 @@
+name: build-and-push-sync-server
+on:
+  push:
+    branches:
+    - master
+    - develop
+    paths:
+    #Build and push when anki-sync-server files change
+    - 'services/anki-sync-server/**'
+env:
+  ANKISYNCD_AUTH_DB_PATH: ./auth.db
+  ANKISYNCD_BASE_MEDIA_URL: /msync/
+  ANKISYNCD_BASE_URL: /sync/
+  ANKISYNCD_DATA_ROOT: ./collections
+  ANKISYNCD_SESSION_DB_PATH: ./session.db
+  ANKISYNCD_PORT: 27701
+jobs:
+  build-and-push-sync-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Set up QEMU for multi-platform builds
+        uses: docker/setup-qemu-action@v1
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get branch name
+        id: extract_branch
+        shell: bash
+        # Tag master as latest, otherwise, tag as latest-BRANCH
+        run: echo "##[set-output name=branchtag;]$(if [ $GITHUB_REF == 'refs/heads/master' ]; then echo ''; else echo -${GITHUB_REF##*/}; fi)" 
+
+      - name: Build for various platforms and push to Dockerhub
+        uses: docker/build-push-action@v2
+        with:
+          context: services/anki-sync-server/images
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/anki-sync-server:latest${{ steps.extract_branch.outputs.branchtag }}
+          build-args: |
+            ANKISYNCD_PORT=${{ env.ANKISYNCD_PORT }}
+            ANKISYNCD_BASE_URL=${{ env.ANKISYNCD_BASE_URL }}
+            ANKISYNCD_BASE_MEDIA_URL=${{ env.ANKISYNCD_BASE_MEDIA_URL }}
+            ANKISYNCD_AUTH_DB_PATH=${{ env.ANKISYNCD_AUTH_DB_PATH }}
+            ANKISYNCD_SESSION_DB_PATH=${{ env.ANKISYNCD_SESSION_DB_PATH }}
+            ANKISYNCD_DATA_ROOT=${{ env.ANKISYNCD_DATA_ROOT }}
