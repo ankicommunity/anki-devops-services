@@ -35,7 +35,7 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 | :--------: | :-----------------: | :---------------: | :----------------------------------------------------------: | ------------ |
 | 2020-02-06 |       2.1.19        |       2.9.1       | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
 
-[Learn more about what "tested" means here.](Testing.md)
+[Learn more about what "tested" means here.](docs/src/TESTING.md)
 
 ### About this Docker image
 
