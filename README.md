@@ -1,36 +1,33 @@
-# Anki Sync Server with Docker - and it works!
+# Anki Sync Server with Docker
 
-A quick and ergonomic way to setup a (reasonably) up-to-date instance of Anki Sync Server, without the hassle.
+<img title="" src="ac_header.png" alt="Easy-to-use container configurations brought to you by Anki Community" width="898" data-align="center">
 
-> Based on tsudoko's [`ankisyncd`](https://github.com/tsudoko/anki-sync-server)
+## Repository contents
 
-**For detailed tutorials, visit [ankicommunity.github.io](https://ankicommunity.github.io/)**
+| Services           | Description |
+|--------------------|-------------|
+| `djankiserv`       | An self-hosted Anki server with a complete API. |
+| `anki-sync-server` | An self-hosted Anki server with basic Sync functionality. |
+
+<p><sup>*Instructions: these notes describe the options of the particular setup. For a generic tutorial on how to use Docker, you may follow [our guide for beginners at ankicommunity.github.io](https://ankicommunity.github.io/Tutorials/Docker/Howto/).</sup></p>
+
+### Configuration files
+
+You may find various files under the `config/` directory:
+
+* Environment variables to source before using the images. Our shell scripts are going to remind you which of these are needed for a particular setup. You may inspect the contents of such a file before sourcing.
+
+* Example configurations of the setup will require you to copy and customize.
+
+## Community support
+
+**For detailed tutorials and news, visit us at [ankicommunity.github.io](https://ankicommunity.github.io/)!**
 
 We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/community).
 
-## News
+## Limitation of responsibility
 
-* 2020-10-17: moved most of the Tutorials to the recently created [Wiki](https://ankicommunity.github.io/)
-
-* 2020-09-21:
-
-  Follow us on Gitter to learn the current progress of supporting newer versions of Anki!
-
-  https://gitter.im/ankicommunity/community
-
-  Special thanks for the work of the server contributors, among them to [AntonOfTheWoods](https://github.com/AntonOfTheWoods) and [VikashKothary](https://github.com/VikashKothary)!
-
-  Learn more about the common problem here:
-
-  * [SyncRedirector can support earlier versions of anki](https://github.com/kuklinistvan/docker-anki-sync-server/issues/16#issuecomment-626304807)
-  * [Will it work on newest version on of Anki desktop? (unlikely for now)](https://github.com/ankicommunity/docker-anki-sync-server/issues/5)
-  * [Unable to login on Anki 2.1.23-1](https://github.com/kuklinistvan/docker-anki-sync-server/issues/15)
-  * ["Your client is using unsupported sync protocol (10, supported version: 9) ](https://github.com/kuklinistvan/docker-anki-sync-server/issues/14)
-  * [Dont work on ARM CPU (Raspberry pi)](https://github.com/ankicommunity/docker-anki-sync-server/issues/9)
-
-
-
-## Technical
+<p><sup>*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.*</sup></p>
 
 ### Tested and works on
 
@@ -38,10 +35,7 @@ We're also happy to help you on [Gitter](https://gitter.im/ankicommunity/communi
 | :--------: | :-----------------: | :---------------: | :----------------------------------------------------------: | ------------ |
 | 2020-02-06 |       2.1.19        |       2.9.1       | [2.1.0 + 2bfccf7f](<https://github.com/kuklinistvan/anki-sync-server/tree/docker-release>) | kuklinistvan |
 
-[Learn more about what "tested" means here.](Testing.md)
-
-
-
+[Learn more about what "tested" means here.](docs/src/TESTING.md)
 
 ### About this Docker image
 
@@ -69,7 +63,6 @@ data:
 ```
 
 #### Rebuilding the image
-
 
 First to clone the repository and update the anki-sync-server:
 

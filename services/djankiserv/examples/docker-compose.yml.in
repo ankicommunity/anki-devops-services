@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  djankiserv:
+    image: ${DOCKER_IMAGE_ORG}/${DOCKER_IMAGE}
+    restart: always
+    volumes:
+      - ./djankiserv_config:/persistence
+      - djankiserv-static:/home/app/static
+
+  postgresdb:
+    image: postgres:13.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: djankiserv
+      POSTGRES_PASSWORD: "${DJANKISERV_DATABASE_PASSWORD}"
+    volumes:
+      - ./postgres_persistence:/var/lib/postgresql/data
+
+  nginx_web:
+    image: nginx:1.19.5
+    restart: always
+    volumes:
+      - djankiserv-static:/usr/share/nginx/html/static
+      - ./nginx_default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
+
+volumes:
+     djankiserv-static: 
