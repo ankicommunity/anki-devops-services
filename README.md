@@ -68,7 +68,6 @@ First to clone the repository and update the anki-sync-server:
 
     git clone https://github.com/ankicommunity/docker-anki-sync-server
     cd docker-anki-sync-server
-    git submodule update --init --recursive
 
 Then apply the following patch to `anki-sync-server/Docker/anki-sync-server`:
 
