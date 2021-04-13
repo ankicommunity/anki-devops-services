@@ -27,4 +27,3 @@ build: build-devops # alias for quick access
 build-devops:
 	@cd "${ANKI_DEVOPS_PATH}" && \
 	${BASH} scripts/build-devops.sh
-
