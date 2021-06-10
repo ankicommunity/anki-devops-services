@@ -45,6 +45,8 @@ ENV ANKISYNCD_HOST=0.0.0.0 \
 	ANKISYNCD_AUTH_DB_PATH=${ANKISYNCD_AUTH_DB_PATH} \
 	ANKISYNCD_SESSION_DB_PATH=${ANKISYNCD_SESSION_DB_PATH}
 
+RUN apt update && apt install -y wget && apt clean
+
 COPY bin/entrypoint.sh ./bin/entrypoint.sh
 
 EXPOSE ${ANKISYNCD_PORT}
