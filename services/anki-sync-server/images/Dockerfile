@@ -7,10 +7,13 @@ WORKDIR ${ANKISYNCD_ROOT}
 
 COPY bin/download-release.sh ./bin/download-release.sh
 
+ARG ANKISYNCD_COMMIT='latest'
+ENV ANKISYNCD_COMMIT=${ANKISYNCD_COMMIT}
+
 ARG PYTHONUSERBASE=/opt/venv
 RUN sh ./bin/download-release.sh && \
 	pip3 install --upgrade pip && \
-    pip3 install --user -r ./release/requirements.txt
+  pip3 install --user -r ./release/requirements.txt
 
 # -- DEPLOYER --
 FROM python:3.9-slim-buster
