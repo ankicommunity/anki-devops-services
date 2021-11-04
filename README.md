@@ -59,7 +59,7 @@ services:
         - data:/app/data
 
 volumes:
-data:
+    data:
 ```
 
 #### Rebuilding the image
