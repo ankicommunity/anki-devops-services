@@ -44,8 +44,6 @@ ENV ANKISYNCD_HOST=0.0.0.0 \
 	ANKISYNCD_AUTH_DB_PATH=${ANKISYNCD_AUTH_DB_PATH} \
 	ANKISYNCD_SESSION_DB_PATH=${ANKISYNCD_SESSION_DB_PATH}
 
-RUN apt update && apt install -y wget && apt clean
-
 COPY bin/entrypoint.sh ./bin/entrypoint.sh
 
 EXPOSE ${ANKISYNCD_PORT}
@@ -53,4 +51,4 @@ EXPOSE ${ANKISYNCD_PORT}
 # TODO: Change to ENTRYPOINT. Currently CMD to allow shell access if needed.
 CMD ["/bin/sh", "./bin/entrypoint.sh"]
 
-HEALTHCHECK --interval=60s --timeout=3s CMD wget -q -O - http://127.0.0.1:27701/ || exit 1
+HEALTHCHECK --interval=60s --timeout=3s CMD python -c 'import requests; requests.get("http://127.0.0.1:27701/")'
