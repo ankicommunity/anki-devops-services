@@ -1,12 +1,15 @@
+ARG ANKISYNCD_ROOT=/opt/ankisyncd
+ARG PYTHONUSERBASE=/opt/venv
+
 # -- BUILDER --
 FROM library/python:3.9-buster as builder
 
-ARG ANKISYNCD_ROOT=/opt/ankisyncd
+ARG ANKISYNCD_ROOT
 WORKDIR ${ANKISYNCD_ROOT}
 
 COPY bin/download-release.sh ./bin/download-release.sh
 
-ARG PYTHONUSERBASE=/opt/venv
+ARG PYTHONUSERBASE
 RUN sh ./bin/download-release.sh && \
 	pip3 install --upgrade pip && \
     pip3 install --user -r ./release/requirements.txt
@@ -15,12 +18,12 @@ RUN sh ./bin/download-release.sh && \
 FROM python:3.9-slim-buster
 
 # Copy Python dependencies
-ARG PYTHONUSERBASE=/opt/venv
+ARG PYTHONUSERBASE
 ENV PYTHONUSERBASE=${PYTHONUSERBASE}
 COPY --from=builder ${PYTHONUSERBASE} ${PYTHONUSERBASE}
 
 # Copy Anki Sync Server release and scripts
-ARG ANKISYNCD_ROOT=/opt/ankisyncd
+ARG ANKISYNCD_ROOT
 COPY --from=builder ${ANKISYNCD_ROOT}/release ${ANKISYNCD_ROOT}
 WORKDIR ${ANKISYNCD_ROOT}
 
