@@ -2,7 +2,6 @@
 FROM library/python:3.9-buster as builder
 
 ARG ANKISYNCD_ROOT=/opt/ankisyncd
-RUN mkdir -p ${ANKISYNCD_ROOT}
 WORKDIR ${ANKISYNCD_ROOT}
 
 COPY bin/download-release.sh ./bin/download-release.sh
