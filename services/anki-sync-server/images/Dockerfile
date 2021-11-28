@@ -26,7 +26,6 @@ WORKDIR ${ANKISYNCD_ROOT}
 
 # Create data volume.
 ARG ANKISYNCD_DATA_ROOT=/srv/ankisyncd
-RUN mkdir -p ${ANKISYNCD_DATA_ROOT}
 VOLUME ${ANKISYNCD_DATA_ROOT}
 
 # Set default environment variables.
