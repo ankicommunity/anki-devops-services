@@ -1,8 +1,10 @@
 name: build-and-push-sync-server
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
+    - develop
     paths:
     #Build and push when anki-sync-server files change
     - 'services/anki-sync-server/**'
@@ -29,8 +31,8 @@ jobs:
       - name: Login to Dockerhub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Get branch name
         id: extract_branch
@@ -50,8 +52,8 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/anki-sync-server:latest${{ steps.extract_branch.outputs.branchtag }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/anki-sync-server:${{ steps.get_date.outputs.datetag }}
+            ankicommunity/anki-sync-server:latest${{ steps.extract_branch.outputs.branchtag }}
+            ankicommunity/anki-sync-server:${{ steps.get_date.outputs.datetag }}
           build-args: |
             ANKISYNCD_PORT=${{ env.ANKISYNCD_PORT }}
             ANKISYNCD_BASE_URL=${{ env.ANKISYNCD_BASE_URL }}
