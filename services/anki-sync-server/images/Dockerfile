@@ -7,6 +7,11 @@ FROM library/python:3.9-buster as builder
 ARG ANKISYNCD_ROOT
 WORKDIR ${ANKISYNCD_ROOT}
 
+ARG ANKISYNCD_GIT_REPOSITORY_URL
+ARG ANKISYNCD_GIT_BRANCH
+ARG ANKISYNCD_GIT_COMMIT_SHA
+ARG ANKISYNCD_GIT_COMMIT_SHORT_SHA
+ARG ANKISYNCD_GIT_COMMIT_TAG
 COPY bin/download-release.sh ./bin/download-release.sh
 
 ARG PYTHONUSERBASE
@@ -16,6 +21,36 @@ RUN sh ./bin/download-release.sh && \
 
 # -- DEPLOYER --
 FROM python:3.9-slim-buster
+
+# Label image with build information
+ARG BUILD_USER_NAME
+ARG BUILD_USER_EMAIL
+ARG BUILD_DATE
+ARG GIT_REPOSITORY_URL
+ARG GIT_BRANCH
+ARG GIT_COMMIT_SHA
+ARG GIT_COMMIT_SHORT_SHA
+ARG GIT_COMMIT_TAG
+ARG GIT_DIRTY
+ARG ANKISYNCD_GIT_REPOSITORY_URL
+ARG ANKISYNCD_GIT_BRANCH
+ARG ANKISYNCD_GIT_COMMIT_SHA
+ARG ANKISYNCD_GIT_COMMIT_SHORT_SHA
+ARG ANKISYNCD_GIT_COMMIT_TAG
+LABEL org.ankicommunity.build.user.name=${BUILD_USER_NAME} \
+	org.ankicommunity.build.user.email=${BUILD_USER_EMAIL} \
+	org.ankicommunity.build.date=${BUILD_DATE} \
+	org.ankicommunity.git.repository.url=${GIT_REPOSITORY_URL} \
+	org.ankicommunity.git.branch=${GIT_BRANCH} \
+	org.ankicommunity.git.commit.sha=${GIT_COMMIT_SHA} \
+	org.ankicommunity.git.commit.short.sha=${GIT_COMMIT_SHORT_SHA} \
+	org.ankicommunity.git.commit.tag=${GIT_COMMIT_TAG} \
+	org.ankicommunity.git.dirty=${GIT_DIRTY} \
+	org.ankicommunity.ankisyncd.git.repository.url=${ANKISYNCD_GIT_REPOSITORY_URL} \
+	org.ankicommunity.ankisyncd.git.branch=${ANKISYNCD_GIT_BRANCH} \
+	org.ankicommunity.ankisyncd.git.commit.sha=${ANKISYNCD_GIT_COMMIT_SHA} \
+	org.ankicommunity.ankisyncd.git.commit.short.sha=${ANKISYNCD_GIT_COMMIT_SHORT_SHA} \
+	org.ankicommunity.ankisyncd.git.commit.tag=${ANKISYNCD_GIT_COMMIT_TAG}
 
 # Copy Python dependencies
 ARG PYTHONUSERBASE
