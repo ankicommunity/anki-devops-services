@@ -50,7 +50,6 @@ COPY bin/entrypoint.sh ./bin/entrypoint.sh
 
 EXPOSE ${ANKISYNCD_PORT}
 
-# TODO: Change to ENTRYPOINT. Currently CMD to allow shell access if needed.
-CMD ["/bin/sh", "./bin/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "./bin/entrypoint.sh"]
 
 HEALTHCHECK --interval=60s --timeout=3s CMD python -c "import requests; requests.get('http://127.0.0.1:${ANKISYNCD_PORT}/')"
