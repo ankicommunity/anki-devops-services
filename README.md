@@ -2,6 +2,24 @@
 
 <img title="" src="ac_header.png" alt="Easy-to-use container configurations brought to you by Anki Community" width="898" data-align="center">
 
+------------
+
+Known Issues
+------------
+
+**⚠️ This project is unmaintained ⚠️**
+
+In the mean time, we recommend you check out the offical sync server here:
+- [Documentation](https://docs.ankiweb.net/sync-server.html)
+- [Repository](https://github.com/ankitects/anki)
+- [WIP Docker Image](https://github.com/ankitects/anki/pull/2798#issuecomment-1812839066)
+
+Or reach out to see how you can help support our development [here](https://github.com/ankicommunity/anki-sync-server/issues/158).
+
+Thank you for your understanding. 
+
+------------
+
 ## Repository contents
 
 | Services           | Description |
